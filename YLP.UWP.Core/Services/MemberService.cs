@@ -103,6 +103,11 @@ namespace YLP.UWP.Core.Services
         #endregion
 
 
+        /// <summary>
+        /// 更新会员头像
+        /// </summary>
+        /// <param name="fileData"></param>
+        /// <returns></returns>
         public async Task<OperationResult> UpdateAvatar(IEnumerable<KeyValuePair<string, byte[]>> fileData)
         {
             FormData.Clear();

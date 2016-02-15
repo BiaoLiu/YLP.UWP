@@ -115,7 +115,6 @@
     <Compile Include="Data\UArticleIncrementalCollection.cs" />
     <Compile Include="DeviceHelper.cs" />
     <Compile Include="DispatcherManager.cs" />
-    <Compile Include="Extensions\ParamterCheckExtensions.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Https\APIBaseService.cs" />
     <Compile Include="Https\APIService.cs" />

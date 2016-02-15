@@ -13,10 +13,5 @@ namespace YLP.UWP.Core.Extensions
         {
             return instance.Equals(((int)OperateCode.Success).ToString());
         }
-
-        public static IEnumerable<KeyValuePair<string, string>> AsKVP(this NameValueCollection source)
-        {
-            return source.AllKeys.SelectMany(source.GetValues, (k, v) => new KeyValuePair<string, string>(k, v));
-        }
     }
 }

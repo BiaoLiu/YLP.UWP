@@ -77,10 +77,9 @@ namespace YLP.UWP.Member
 
             openPicker.FileTypeFilter.Add(".jpg");
             openPicker.FileTypeFilter.Add(".png");
-            //openPicker.FileTypeFilter.Add(".gif");
 
-            var storageFiles = await openPicker.PickMultipleFilesAsync();
-            if (storageFiles == null)
+            var storageFile = await openPicker.PickSingleFileAsync();
+            if (storageFile == null)
             {
                 await new MessageDialog("请选择图片").ShowAsync();
                 return;
@@ -88,32 +87,32 @@ namespace YLP.UWP.Member
 
             this.progressRing.IsActive = true;
 
-            byte[] content = null;
+            IRandomAccessStreamWithContentType accessStream = await storageFile.OpenReadAsync();
+            var fileName = storageFile.Name;
 
-            // 获取指定的文件的文本内容
-
-            var count = 0;
-            foreach (var storageFile in storageFiles)
+            byte[] content;
+            using (Stream stream = accessStream.AsStreamForRead((int)accessStream.Size))
             {
-                IRandomAccessStreamWithContentType accessStream = await storageFile.OpenReadAsync();
-
-                var fileName = storageFile.Name;
-
-                using (Stream stream = accessStream.AsStreamForRead((int)accessStream.Size))
-                {
-                    content = new byte[stream.Length];
-                    await stream.ReadAsync(content, 0, (int)stream.Length);
-                }
-
-                var fileData = new List<KeyValuePair<string, byte[]>>();
-                fileData.Add(new KeyValuePair<string, byte[]>(fileName, content));
-
-           
+                content = new byte[stream.Length];
+                await stream.ReadAsync(content, 0, (int)stream.Length);
             }
+
+            var fileData = new List<KeyValuePair<string, byte[]>>();
+            fileData.Add(new KeyValuePair<string, byte[]>(fileName, content));
+
+            var api=new MemberService();
+            var result= await api.UpdateAvatar(fileData);
 
             this.progressRing.IsActive = false;
 
-            await new MessageDialog($"{count}个用户头像更新成功").ShowAsync();
+            if (result.Success)
+            {
+                await new MessageDialog("更新成功").ShowAsync();
+            }
+            else
+            {
+                await new MessageDialog(result.Msg).ShowAsync();
+            }
         }
     }
 }
