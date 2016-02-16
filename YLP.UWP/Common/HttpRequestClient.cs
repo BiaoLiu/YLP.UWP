@@ -481,9 +481,9 @@ namespace YLP.UWP.Core.Data
                 /// 如果指定的文件存在,它会被覆盖
                 /// </summary>
                 /// <param name="fileName">要保存的文件路径</param>
-        public void SaveAsFile(string fileName)
+        public async void SaveAsFile(string fileName)
         {
-            SaveAsFile(fileName, FileExistsAction.Overwrite);
+            await SaveAsFile(fileName, FileExistsAction.Overwrite);
         }
 
         /// <summary>

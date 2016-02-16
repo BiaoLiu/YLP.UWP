@@ -2,28 +2,27 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI.Xaml.Data;
+using YLP.UWP.Core;
 using YLP.UWP.Core.Data;
 using YLP.UWP.Core.Models;
 using YLP.UWP.Core.Services;
 
-namespace YLP.UWP.Core
+namespace YLP.UWP
 {
-    public class UArticleIncrementalCollection : ObservableCollection<UArticle>, ISupportIncrementalLoading
+    public class IncrementalLoadingBase<T> : ObservableCollection<T>, ISupportIncrementalLoading
     {
-        private readonly UArticleService _api = new UArticleService();
-
-
+        private readonly Func<Task<OperationResult<List<T>>>> _dataFetchDelegate;
 
         private bool _busy;
         private bool _hasMoreItems;
         private int _currentPage = 1;
         private int _pageSize = 12;
-
-        private readonly Dictionary<string, string> _dict;
 
         public event DataLoadingEventHandler DataLoading;
         public event DataLoadedEventHandler DataLoaded;
@@ -48,9 +47,10 @@ namespace YLP.UWP.Core
                 _hasMoreItems = value;
             }
         }
-        public UArticleIncrementalCollection(Dictionary<string, string> dict)
+        public IncrementalLoadingBase(Func<Task<OperationResult<List<T>>>> dataFetchDelegate)
         {
-            _dict = dict;
+            _dataFetchDelegate = dataFetchDelegate;
+
             HasMoreItems = true;
         }
         public void DoRefresh()
@@ -68,13 +68,13 @@ namespace YLP.UWP.Core
         {
             _busy = true;
             var actualCount = 0;
-            List<UArticle> list = null;
+            List<T> list = null;
 
             try
             {
                 DataLoading?.Invoke();
 
-                var result = await _api.GetUArticles(_dict, _currentPage, _pageSize);
+                var result = await _dataFetchDelegate();
                 list = result.Data;
             }
             catch (Exception)
@@ -89,7 +89,7 @@ namespace YLP.UWP.Core
                 _currentPage++;
 
                 HasMoreItems = true;
-                list.ForEach(this.Add);
+                list.ForEach(c=>this.Add(c));
             }
             else
             {

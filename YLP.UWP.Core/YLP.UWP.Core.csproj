@@ -108,10 +108,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\DisplayNameAttribute.cs" />
+    <Compile Include="Common\Command.cs" />
+    <Compile Include="Common\NotifyPropertyChanged.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="Data\Delegates.cs" />
     <Compile Include="Data\LocalSetting.cs" />
     <Compile Include="Data\SingletonProvider.cs" />
+    <Compile Include="Data\UArticleCollection.cs" />
     <Compile Include="Data\UArticleIncrementalCollection.cs" />
     <Compile Include="DeviceHelper.cs" />
     <Compile Include="DispatcherManager.cs" />
@@ -121,6 +124,7 @@
     <Compile Include="Https\BaseService.cs" />
     <Compile Include="Https\HttpRequestClient.cs" />
     <Compile Include="Https\ServiceURL.cs" />
+    <Compile Include="Data\IncrementalLoadingBase.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Picture.cs" />
@@ -139,6 +143,7 @@
     <Compile Include="Utilities\EnumHelper.cs" />
     <Compile Include="Utilities\FileHelper.cs" />
     <Compile Include="ViewModels\AriticleViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\UArticleViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />

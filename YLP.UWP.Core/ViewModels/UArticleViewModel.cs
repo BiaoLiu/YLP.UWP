@@ -22,8 +22,7 @@ namespace YLP.UWP.Core.ViewModels
             }
             set
             {
-                _uarticles = value;
-                OnPropertyChanged();
+                SetProperty(ref _uarticles,value);
             }
         }
 
@@ -36,8 +35,7 @@ namespace YLP.UWP.Core.ViewModels
             }
             set
             {
-                _isLoading = value;
-                OnPropertyChanged();
+                SetProperty(ref _isLoading,value);
             }
         }
 
