@@ -11,6 +11,9 @@ using YLP.UWP.Core.Extensions;
 
 namespace YLP.UWP.Core
 {
+    /// <summary>
+    /// 服务器返回结果
+    /// </summary>
     public class OperationResult
     {
         private const string ErrorInfo = "请求失败";

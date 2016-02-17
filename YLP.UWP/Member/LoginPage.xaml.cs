@@ -14,7 +14,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using YLP.UWP.Common;
 using YLP.UWP.Core.Data;
 using YLP.UWP.Core.Models;
 using YLP.UWP.Core.Services;

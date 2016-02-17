@@ -18,7 +18,6 @@ namespace YLP.UWP.Core.Https
         //应用ID
         private const string AppId = "1dce319b3a2ca219406de274767772cb";
         public Dictionary<string, string> FormData = new Dictionary<string, string>();
-        public MessageTipsDelegate MessageTipsHandler;
 
         /// <summary>
         ///     向服务器发送GET请求 返回JSON格式数据

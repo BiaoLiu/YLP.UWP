@@ -9,11 +9,9 @@
     xmlns:data="using:YLP.UWP.Core.Models"
 >
 
-    <!--d:DataContext="{d:DesignInstance Type=viewModels:UAarticleViewModel, IsDesignTimeCreatable=True}"-->
     <Page.Resources>
         <!--<local:TotalCommentsFormat x:Key="totalCommentsFormat"></local:TotalCommentsFormat>
         <local:TimeFormat x:Key="timeFormat"></local:TimeFormat>-->
-        
         
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -65,8 +63,7 @@
                   Grid.Row="1"
                   SelectionMode="None"
                   IsItemClickEnabled="True"
-               
-                  ItemsSource="{x:Bind ViewModel}"
+                  ItemsSource="{x:Bind ViewModel.UArticles}"
                   >
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="data:UArticle">
@@ -177,7 +174,7 @@
                       Name="Loading"
                       Width="100"
                       Height="100"
-                      IsActive="True">
+                      IsActive="{x:Bind ViewModel.IsLoading,Mode=OneWay}">
 
         </ProgressRing>
     </Grid>

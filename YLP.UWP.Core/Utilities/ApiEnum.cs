@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YLP.UWP.Common
+namespace YLP.UWP.Core
 {
     public enum MemberEnum
     {
@@ -64,6 +64,4 @@ namespace YLP.UWP.Common
 
         focuscancel
     }
-
-   
 }

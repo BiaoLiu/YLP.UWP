@@ -2,36 +2,37 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI.Xaml.Data;
-using YLP.UWP.Core.Data;
-using YLP.UWP.Core.Models;
-using YLP.UWP.Core.Services;
 
-namespace YLP.UWP.Core
+namespace YLP.UWP.Core.Common
 {
-    public class UArticleIncrementalCollection : ObservableCollection<UArticle>, ISupportIncrementalLoading
+    public class IncrementalLoading<T> : ObservableCollection<T>, ISupportIncrementalLoading
     {
-        private readonly UArticleService _api = new UArticleService();
-
-
+        private readonly Func<int, int, Task<OperationResult<List<T>>>> _dataFetchDelegate;
 
         private bool _busy;
         private bool _hasMoreItems;
-        private int _currentPage = 1;
+        //当前页码
+        private int _pageIndex = 1;
+        //页容量
         private int _pageSize = 12;
-
-        private readonly Dictionary<string, string> _dict;
 
         public event DataLoadingEventHandler DataLoading;
         public event DataLoadedEventHandler DataLoaded;
 
-        public int TotalCount
-        {
-            get; set;
-        }
+        /// <summary>
+        /// 总条数
+        /// </summary>
+        public int TotalCount { get; set; }
+
+        /// <summary>
+        /// 是否还有更多条目
+        /// </summary>
         public bool HasMoreItems
         {
             get
@@ -48,14 +49,19 @@ namespace YLP.UWP.Core
                 _hasMoreItems = value;
             }
         }
-        public UArticleIncrementalCollection(Dictionary<string, string> dict)
+        public IncrementalLoading(Func<int, int, Task<OperationResult<List<T>>>> dataFetchDelegate)
         {
-            _dict = dict;
+            _dataFetchDelegate = dataFetchDelegate;
+
             HasMoreItems = true;
         }
+
+        /// <summary>
+        /// 刷新操作
+        /// </summary>
         public void DoRefresh()
         {
-            _currentPage = 1;
+            _pageIndex = 1;
             TotalCount = 0;
             Clear();
             HasMoreItems = true;
@@ -67,17 +73,19 @@ namespace YLP.UWP.Core
         private async Task<LoadMoreItemsResult> InnerLoadMoreItemsAsync(uint expectedCount)
         {
             _busy = true;
+            //实际条数
             var actualCount = 0;
-            List<UArticle> list = null;
 
+            List<T> list = null;
             try
             {
+                //开始加载
                 DataLoading?.Invoke();
-
-                var result = await _api.GetUArticles(_dict, _currentPage, _pageSize);
+                //请求服务器获取数据
+                var result = await _dataFetchDelegate(_pageIndex, _pageSize);
                 list = result.Data;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 HasMoreItems = false;
             }
@@ -86,7 +94,7 @@ namespace YLP.UWP.Core
             {
                 actualCount = list.Count;
                 TotalCount += actualCount;
-                _currentPage++;
+                _pageIndex++;
 
                 HasMoreItems = true;
                 list.ForEach(this.Add);
@@ -96,11 +104,15 @@ namespace YLP.UWP.Core
                 HasMoreItems = false;
             }
 
+            //加载结束
             DataLoaded?.Invoke();
-
             _busy = false;
 
             return new LoadMoreItemsResult { Count = (uint)actualCount };
         }
     }
+
+    public delegate void DataLoadingEventHandler();
+
+    public delegate void DataLoadedEventHandler();
 }

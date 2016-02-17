@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YLP.UWP.Core.Common;
 using YLP.UWP.Core.Models;
 using YLP.UWP.Core.Services;
 
@@ -11,10 +12,9 @@ namespace YLP.UWP.Core.ViewModels
     public class UArticleViewModel : ViewModelBase
     {
         private readonly UArticleService _api = new UArticleService();
-        private readonly Dictionary<string, string> _dict;
 
-        private UArticleIncrementalCollection _uarticles;
-        public UArticleIncrementalCollection UArticles
+        private IncrementalLoading<UArticle> _uarticles;
+        public IncrementalLoading<UArticle> UArticles
         {
             get
             {
@@ -22,7 +22,7 @@ namespace YLP.UWP.Core.ViewModels
             }
             set
             {
-                SetProperty(ref _uarticles,value);
+                SetProperty(ref _uarticles, value);
             }
         }
 
@@ -35,36 +35,24 @@ namespace YLP.UWP.Core.ViewModels
             }
             set
             {
-                SetProperty(ref _isLoading,value);
+                SetProperty(ref _isLoading, value);
             }
         }
 
-        public UArticleViewModel(Dictionary<string, string> dict)
+        public UArticleViewModel(string otherUserId, string type, string tag)
         {
-            _dict = dict;
+            UArticles = new IncrementalLoading<UArticle>((p, s) => _api.GetUArticles(otherUserId, type, tag, p, s));
+
+            UArticles.DataLoading += DataLoading;
+            UArticles.DataLoaded += DataLoaded;
         }
 
-        public async void Update()
-        {
-            var result = await _api.GetUArticles(_dict,1,12);
-
-            var uarticles = result.Data;
-            if (uarticles != null && uarticles.Any())
-            {
-                UArticles = new UArticleIncrementalCollection(_dict);
-                uarticles.ForEach(c => UArticles.Add(c));
-
-                UArticles.DataLoaded += C_DataLoaded;
-                UArticles.DataLoading += C_DataLoading;
-            }
-        }
-
-        private void C_DataLoading()
+        private void DataLoading()
         {
             IsLoading = true;
         }
 
-        private void C_DataLoaded()
+        private void DataLoaded()
         {
             IsLoading = false;
         }

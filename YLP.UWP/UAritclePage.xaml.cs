@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Networking.BackgroundTransfer;
@@ -19,7 +20,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using YLP.UWP.Common;
 using YLP.UWP.Core;
 using YLP.UWP.Core.Https;
 using YLP.UWP.Core.Models;
@@ -36,34 +36,17 @@ namespace YLP.UWP
     /// </summary>
     public sealed partial class UAritclePage : Page
     {
-        public UArticleIncrementalCollection ViewModel;
+        public UArticleViewModel ViewModel;
         public UAritclePage()
         {
+            ViewModel = new UArticleViewModel("", UArticleType.latest.ToString(), "");
+
             this.InitializeComponent();
-
-            var dict = new Dictionary<string, string>();
-            dict["deviceid"] = Guid.NewGuid().ToString();
-            dict["type"] = UArticleType.latest.ToString();
-
-
-            ViewModel = new UArticleIncrementalCollection(dict);
-            ViewModel.DataLoading += DataLoading;
-            ViewModel.DataLoaded += DataLoaded;
         }
 
-        /// <summary>
-        /// 开始加载
-        /// </summary>
-        private void DataLoading()
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Loading.IsActive = true;
-        }
-        /// <summary>
-        /// 加载完毕
-        /// </summary>
-        private void DataLoaded()
-        {
-            Loading.IsActive = false;
+
         }
 
         /// <summary>
@@ -86,7 +69,6 @@ namespace YLP.UWP
                 return;
             }
 
-        
             await new MessageDialog("点赞完成").ShowAsync();
         }
 
@@ -168,9 +150,9 @@ namespace YLP.UWP
 
         private async void Refresh_OnClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.DoRefresh();
+            ViewModel.UArticles.DoRefresh();
 
-            await ViewModel.LoadMoreItemsAsync(1);
+            await ViewModel.UArticles.LoadMoreItemsAsync(1);
         }
 
         private void BackHome_OnClick(object sender, RoutedEventArgs e)
