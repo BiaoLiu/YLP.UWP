@@ -12,6 +12,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using YLP.UWP.Core.ViewModels;
+using YLP.UWP.Test;
 
 //“空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 上有介绍
 
@@ -22,9 +24,23 @@ namespace YLP.UWP
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public MainViewModel ViewModel { get; set; }
+
         public MainPage()
         {
+            ViewModel = new MainViewModel();
+
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e.NavigationMode == NavigationMode.New)
+            {
+                this.FramePage.Navigate(typeof(Login));
+
+                base.OnNavigatedTo(e);
+            }
         }
     }
 }

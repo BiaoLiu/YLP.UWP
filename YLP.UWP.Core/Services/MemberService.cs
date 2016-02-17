@@ -102,7 +102,8 @@ namespace YLP.UWP.Core.Services
 
         #endregion
 
-
+        #region UpdateAvatar 更新会员头像
+      
         /// <summary>
         /// 更新会员头像
         /// </summary>
@@ -121,6 +122,8 @@ namespace YLP.UWP.Core.Services
             result.Retcode = response?.GetNamedString("retcode");
 
             return result;
-        }
+        } 
+
+        #endregion
     }
 }

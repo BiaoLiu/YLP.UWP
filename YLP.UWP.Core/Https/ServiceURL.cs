@@ -14,6 +14,14 @@ namespace YLP.UWP.Core.Https
         private const string Host = "http://testapi.yuleband.com/";
         // private const string Host = "http://localhost:24369/";
 
+
+        #region 首页模块
+
+        public const string Main_SlideArticleList = Host + "api/main-gettoparticle"; 
+        
+        #endregion
+
+
         #region 会员模块
 
         /// <summary>
