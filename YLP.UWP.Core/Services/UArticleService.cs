@@ -16,6 +16,15 @@ namespace YLP.UWP.Core.Services
 {
     public class UArticleService : APIBaseService
     {
+        /// <summary>
+        /// 获取用户作品列表
+        /// </summary>
+        /// <param name="otherUserId"></param>
+        /// <param name="type"></param>
+        /// <param name="tag"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
         public async Task<OperationResult<List<UArticle>>> GetUArticles(string otherUserId, string type, string tag, int pageIndex, int pageSize)
         {
             FormData.Clear();
@@ -43,42 +52,14 @@ namespace YLP.UWP.Core.Services
             return result;
         }
 
-        public async Task<OperationResult<List<UArticle>>> GetUArticles(Dictionary<string, string> dict, int pageIndex, int pageSize)
-        {
-            FormData.Clear();
-
-            foreach (var item in dict.Keys)
-            {
-                FormData[item] = dict[item];
-            }
-            //FormData["pindex"] = pageIndex.ToString();
-            //FormData["psize"] = pageSize.ToString();
-
-            FormData["pindex"] = pageIndex.ToString();
-            FormData["psize"] = pageSize.ToString();
-
-            var result = new OperationResult<List<UArticle>>();
-
-            var response = await GetResponse(ServiceURL.UArticle_UArticleList);
-            result.Retcode = response?.GetNamedString("retcode");
-
-            if (response != null && result.Retcode?.CheckSuccess() == true)
-            {
-                var data = response.GetNamedValue("data");
-
-                result.Data = JsonConvert.DeserializeObject<List<UArticle>>(data.ToString());
-            }
-
-            return result;
-        }
-
-        public async Task<OperationResult<List<UArticle>>> GetUArticles(int pageIndex, int pageSize)
-        {
-            return null;
-        }
-
-
-
+        /// <summary>
+        /// 创建用户作业
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="tags"></param>
+        /// <param name="tool"></param>
+        /// <param name="fileData"></param>
+        /// <returns></returns>
         public async Task<OperationResult> CreateUArticle(string title, string tags, string tool, IEnumerable<KeyValuePair<string, byte[]>> fileData)
         {
             FormData.Clear();
@@ -89,7 +70,6 @@ namespace YLP.UWP.Core.Services
             FormData["tags"] = tags;
             FormData["tool"] = tool;
             FormData["title"] = title;
-            //FormData["pic"] = pic;
 
             var result = new OperationResult<string>();
 

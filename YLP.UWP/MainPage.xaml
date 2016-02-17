@@ -103,12 +103,12 @@
         </Page.Resources>
 
         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <SplitView
+        <SplitView
                   IsPaneOpen="{x:Bind splitViewToggle.IsChecked,Mode=TwoWay,Converter={StaticResource NullableBooleanToBoolean}}"
                    DisplayMode="CompactOverlay"
                    OpenPaneLength="100">
-                <SplitView.Pane>
-                    <RelativePanel>
+            <SplitView.Pane>
+                <RelativePanel>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="48" />
@@ -116,7 +116,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <ToggleButton x:Name="splitViewToggle" Style="{StaticResource SplitViewTogglePaneButtonStyle}" />
-                        
+
                         <ListView Grid.Row="1">
                             <ListViewItem>
                                 <StackPanel Orientation="Horizontal" >
@@ -129,7 +129,7 @@
                             <ListViewItem>
                                 <StackPanel Orientation="Horizontal" >
                                     <SymbolIcon Symbol="Emoji2" />
-                                <TextBlock Text="乐图"
+                                    <TextBlock Text="乐图"
                                            Margin="17,0,0,0"
                                            VerticalAlignment="Center" />
                                 </StackPanel>
@@ -159,7 +159,7 @@
                                 </StackPanel>
                             </ListViewItem>
                         </ListView>
-                      
+
                     </Grid>
                 </RelativePanel>
             </SplitView.Pane>
@@ -176,13 +176,11 @@
                     </Border>
 
                     <Border Background="LightGray" Grid.Column="1">
-                    <TextBlock Text="Content" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Border>
+                        <TextBlock Text="Content" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
 
                 </Grid>
             </SplitView.Content>
         </SplitView>
-
-          
-        </Grid>
+    </Grid>
 </Page>
