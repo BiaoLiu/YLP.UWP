@@ -17,8 +17,14 @@ namespace YLP.UWP.Core.Https
 
         #region 首页模块
 
-        public const string Main_SlideArticleList = Host + "api/main-gettoparticle"; 
-        
+        public const string Main_SlideArticleList = Host + "api/main-gettoparticle";
+
+        public const string Main_R2ArticleList = Host + "api/main-getr2articlelist";
+
+        public const string Main_R3ArticleList = Host + "api/main-getr3articlelist";
+
+        public const string Main_UArticleList = Host + "api/main-gettasklist";
+
         #endregion
 
 

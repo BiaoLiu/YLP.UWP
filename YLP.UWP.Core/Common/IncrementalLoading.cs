@@ -56,6 +56,12 @@ namespace YLP.UWP.Core.Common
             HasMoreItems = true;
         }
 
+        public IncrementalLoading(Func<int, int, Task<OperationResult<List<T>>>> dataFetchDelegate, int pageSize)
+            : this(dataFetchDelegate)
+        {
+            _pageSize = pageSize;
+        }
+
         /// <summary>
         /// 刷新操作
         /// </summary>
