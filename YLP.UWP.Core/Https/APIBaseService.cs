@@ -20,7 +20,7 @@ namespace YLP.UWP.Core.Https
         public Dictionary<string, string> FormData = new Dictionary<string, string>();
 
         /// <summary>
-        ///     向服务器发送GET请求 返回JSON格式数据
+        /// 向服务器发送GET请求 返回JSON格式数据
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
@@ -36,12 +36,11 @@ namespace YLP.UWP.Core.Https
         }
 
         /// <summary>
-        ///     向服务器发送POST请求 返回JSON格式数据
+        /// 向服务器发送POST请求 返回JSON格式数据
         /// </summary>
         /// <param name="url"></param>
-        /// <param name="checkRetcode"></param>
         /// <returns></returns>
-        public async Task<JsonObject> GetResponse(string url, bool checkRetcode = false)
+        public async Task<JsonObject> GetResponse(string url)
         {
             //构建请求参数字典
             GenerateRequestParams();
@@ -49,24 +48,14 @@ namespace YLP.UWP.Core.Https
             var response = await BaseService.SendPostRequestAsync(url, FormData);
             if (response != null)
             {
-                var jsonData = JsonObject.Parse(response);
-                if (checkRetcode)
-                {
-                    var retcode = jsonData.GetNamedString("retcode");
-                    if (!retcode.CheckSuccess())
-                    {
-                        return null;
-                    }
-                    return jsonData.GetNamedObject("data");
-                }
-                return jsonData;
+                return JsonObject.Parse(response);
             }
 
             return null;
         }
 
         /// <summary>
-        ///     向服务器发送POST请求 返回JSON格式数据
+        /// 向服务器发送POST请求 返回JSON格式数据
         /// </summary>
         /// <param name="url"></param>
         /// <param name="fileData"></param>
@@ -94,7 +83,7 @@ namespace YLP.UWP.Core.Https
         }
 
         /// <summary>
-        ///     向服务器发送GET请求 返回HTML格式数据
+        /// 向服务器发送GET请求 返回HTML格式数据
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
@@ -117,7 +106,7 @@ namespace YLP.UWP.Core.Https
         }
 
         /// <summary>
-        ///     向服务器发送请求 获取图片
+        /// 向服务器发送请求 获取图片
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
@@ -133,7 +122,7 @@ namespace YLP.UWP.Core.Https
                     using (var memoryStream = new InMemoryRandomAccessStream())
                     {
                         var streamWriter = memoryStream.AsStreamForWrite();
-                        await streamWriter.WriteAsync(buffer.ToArray(), 0, (int) buffer.Length);
+                        await streamWriter.WriteAsync(buffer.ToArray(), 0, (int)buffer.Length);
 
                         await streamWriter.FlushAsync();
                         memoryStream.Seek(0);
@@ -157,7 +146,7 @@ namespace YLP.UWP.Core.Https
         }
 
         /// <summary>
-        ///     构建请求参数字典
+        /// 构建请求参数字典
         /// </summary>
         private void GenerateRequestParams()
         {

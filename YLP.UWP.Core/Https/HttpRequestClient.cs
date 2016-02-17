@@ -18,7 +18,7 @@ namespace YLP.UWP.Core.Https
         {
             using (HttpClient client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));//设定要响应的数据格式
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded")); //设定要响应的数据格式
                 using (var content = new MultipartFormDataContent()) //表明是通过multipart/form-data的方式上传数据
                 {
                     var formDatas = this.GetFormDataByteArrayContent(formData); //获取键值集合对应的ByteArrayContent集合
@@ -32,12 +32,12 @@ namespace YLP.UWP.Core.Https
                          }
                      };
 
-                    act(formDatas);//执行act
-                    act(files);//执行act
+                    act(formDatas);
+                    act(files);
 
                     try
                     {
-                        var response = await client.PostAsync(url, content);//post请求
+                        var response = await client.PostAsync(url, content); //post请求
                         response.EnsureSuccessStatusCode();
 
                         return await response.Content.ReadAsStringAsync();

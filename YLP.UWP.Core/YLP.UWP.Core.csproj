@@ -116,7 +116,6 @@
     <Compile Include="DispatcherManager.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Https\APIBaseService.cs" />
-    <Compile Include="Https\APIService.cs" />
     <Compile Include="Https\BaseService.cs" />
     <Compile Include="Https\HttpRequestClient.cs" />
     <Compile Include="Https\ServiceURL.cs" />
