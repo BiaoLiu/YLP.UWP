@@ -7,120 +7,246 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:data="using:YLP.UWP.Core.Models">
+    
+    <Page.Resources>
+        <local:DateTimeToFriendlyStringConverter x:Key="TimeFormatter"/>
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <Pivot>
+            <PivotItem Header="热门" HorizontalContentAlignment="Stretch"
+                       Margin="-10,0,-10,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-        <RelativePanel>
-            <Button FontFamily="Segoe MDL2 Assets"
+                    <RelativePanel>
+                        <Button FontFamily="Segoe MDL2 Assets"
                 FontSize="20"
                 RelativePanel.AlignRightWithPanel="True" 
                 RelativePanel.AlignVerticalCenterWithPanel="True"
                 Background="Transparent" 
                 Content="&#xE117;"/>
-        </RelativePanel>
-        
-        <ListView  Grid.Row="1" ItemsSource="{x:Bind ViewModel.UArticles}" 
-                   SelectionMode="None"
-                   Margin="-10,0,-10,0">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="data:UArticle">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition  />
-                            <RowDefinition />
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
+                    </RelativePanel>
 
-                        <RelativePanel>
-                            <StackPanel Orientation="Horizontal" Padding="0,20,0,0">
-                                <Ellipse Width="50" Height="50">
-                                    <Ellipse.Fill>
-                                        <ImageBrush ImageSource="{x:Bind avatar}"/>
-                                    </Ellipse.Fill>
-                                </Ellipse>
-                                <Grid >
+                    <ListView  Grid.Row="1" ItemsSource="{x:Bind ViewModel.HotUArticles}" 
+                   SelectionMode="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="data:UArticle">
+                                <Grid>
                                     <Grid.RowDefinitions>
+                                        <RowDefinition  />
+                                        <RowDefinition />
+                                        <RowDefinition/>
                                         <RowDefinition/>
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Text="{x:Bind username}" Margin="10,5,0,0"/>
-                                    <StackPanel Grid.Row="1" Orientation="Horizontal">
-                                        <TextBlock  Text="{x:Bind pubtime}"  Margin="10,0,0,0"/>
-                                        <TextBlock Text="来自" Margin="20,0,0,0"></TextBlock>
-                                    </StackPanel>
-                                </Grid>
 
-                            </StackPanel>
-                            <TextBlock RelativePanel.AlignRightWithPanel="True" Text="test"/>
-                        </RelativePanel>
+                                    <RelativePanel>
+                                        <StackPanel Orientation="Horizontal" Padding="0,20,0,0">
+                                            <Ellipse Width="50" Height="50">
+                                                <Ellipse.Fill>
+                                                    <ImageBrush ImageSource="{x:Bind avatar}"/>
+                                                </Ellipse.Fill>
+                                            </Ellipse>
+                                            <Grid >
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Text="{x:Bind username}" Margin="10,5,0,0"/>
+                                                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                                    <TextBlock  Text="{x:Bind pubtime,Converter={StaticResource TimeFormatter}}" Margin="10,0,0,0"/>
+                                                    <TextBlock Text="来自" Margin="20,0,0,0"/>
+                                                    <TextBlock Text="{x:Bind tool}"/>
+                                                </StackPanel>
+                                            </Grid>
 
-                        <TextBlock Margin="0,20,0,0" Grid.Row="1" Text="{x:Bind title}"/>
+                                        </StackPanel>
+                                        <TextBlock RelativePanel.AlignRightWithPanel="True" Text="test"/>
+                                    </RelativePanel>
 
-                        <Image Margin="0,20,0,0" Grid.Row="2" Source="{x:Bind pics.url}"/>
-
-                        <RelativePanel Grid.Row="3"
+                                    <TextBlock Margin="0,20,0,0" Grid.Row="1" Text="{x:Bind title}"/>
+                                    <Image Margin="0,20,0,0" Grid.Row="2" Source="{x:Bind pics.url}"/>
+                                    <RelativePanel Grid.Row="3"
                               BorderBrush="AliceBlue"
                               BorderThickness="0,1,0,0"
                               Margin="0,30,0,0">
-                            <Button x:Name="BtnGoods" 
+                                        <Button x:Name="BtnGoods" 
                                 Background="Transparent"
                                 RelativePanel.AlignLeftWithPanel="True"
                                 Margin="30,0,0,0">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="&#xE19F;"
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="&#xE19F;"
                                        VerticalAlignment="Center"
                                                    FontFamily="Segoe MDL2 Assets"
                                                    FontSize="14" 
                                                     />
-                                    <TextBlock Text="{x:Bind goods}" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                </StackPanel>
-                            </Button>
+                                                <TextBlock Text="{x:Bind goods}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                            </StackPanel>
+                                        </Button>
 
-                            <Button x:Name="BtnComment"
+                                        <Button x:Name="BtnComment"
                                 Background="Transparent"
                                 RelativePanel.AlignHorizontalCenterWithPanel="True">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="&#xE19F;" 
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="&#xE19F;" 
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                                    FontFamily="Segoe MDL2 Assets"
                                                    FontSize="14" 
                                                     />
-                                    <TextBlock Text="{x:Bind comments}" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                </StackPanel>
-                            </Button>
+                                                <TextBlock Text="{x:Bind comments}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                            </StackPanel>
+                                        </Button>
 
-                            <Button x:Name="BtnShare"
+                                        <Button x:Name="BtnShare"
                                    Background="Transparent"
                                    RelativePanel.AlignRightWithPanel="True"
                                     Margin="0,0,30,0">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="&#xE19F;" 
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="&#xE19F;" 
                                        VerticalAlignment="Center"
                                                    FontFamily="Segoe MDL2 Assets"
                                                    FontSize="14" 
                                                     />
-                                    <TextBlock Text="{x:Bind shares}" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                </StackPanel>
-                            </Button>
-                        </RelativePanel>
-                        
-                        <Border Grid.Row="4" Height="20" Background="LightGray"/>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                    <Setter Property="Margin" Value="0"></Setter>
-                </Style>
-            </ListView.ItemContainerStyle>
-        </ListView>
+                                                <TextBlock Text="{x:Bind shares}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </RelativePanel>
+
+                                    <Border Grid.Row="4" Height="20" Background="LightGray"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Margin" Value="0"></Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                </Grid>
+            </PivotItem>
+            <PivotItem Header="最新" HorizontalContentAlignment="Stretch"
+                       Margin="-10,0,-10,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <RelativePanel>
+                        <Button FontFamily="Segoe MDL2 Assets"
+                FontSize="20"
+                RelativePanel.AlignRightWithPanel="True" 
+                RelativePanel.AlignVerticalCenterWithPanel="True"
+                Background="Transparent" 
+                Content="&#xE117;"/>
+                    </RelativePanel>
+
+                    <ListView  Grid.Row="1" ItemsSource="{x:Bind ViewModel.LatestUArticles}" 
+                   SelectionMode="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="data:UArticle">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition  />
+                                        <RowDefinition />
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+
+                                    <RelativePanel>
+                                        <StackPanel Orientation="Horizontal" Padding="0,20,0,0">
+                                            <Ellipse Width="50" Height="50">
+                                                <Ellipse.Fill>
+                                                    <ImageBrush ImageSource="{x:Bind avatar}"/>
+                                                </Ellipse.Fill>
+                                            </Ellipse>
+                                            <Grid >
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Text="{x:Bind username}" Margin="10,5,0,0"/>
+                                                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                                    <TextBlock  Text="{x:Bind pubtime,Converter={StaticResource TimeFormatter}}"  Margin="10,0,0,0"/>
+                                                    <TextBlock Text="来自" Margin="20,0,0,0"/>
+                                                    <TextBlock Text="{x:Bind tool}"/>
+                                                </StackPanel>
+                                            </Grid>
+
+                                        </StackPanel>
+                                        <TextBlock RelativePanel.AlignRightWithPanel="True" Text="test"/>
+                                    </RelativePanel>
+
+                                    <TextBlock Margin="0,20,0,0" Grid.Row="1" Text="{x:Bind title}"/>
+                                    <Image Margin="0,20,0,0" Grid.Row="2" Source="{x:Bind pics.url}"/>
+                                    <RelativePanel Grid.Row="3"
+                              BorderBrush="AliceBlue"
+                              BorderThickness="0,1,0,0"
+                              Margin="0,30,0,0">
+                                        <Button x:Name="BtnGoods" 
+                                Background="Transparent"
+                                RelativePanel.AlignLeftWithPanel="True"
+                                Margin="30,0,0,0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="&#xE19F;"
+                                       VerticalAlignment="Center"
+                                                   FontFamily="Segoe MDL2 Assets"
+                                                   FontSize="14" 
+                                                    />
+                                                <TextBlock Text="{x:Bind goods}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                            </StackPanel>
+                                        </Button>
+
+                                        <Button x:Name="BtnComment"
+                                Background="Transparent"
+                                RelativePanel.AlignHorizontalCenterWithPanel="True">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="&#xE19F;" 
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                                   FontFamily="Segoe MDL2 Assets"
+                                                   FontSize="14" 
+                                                    />
+                                                <TextBlock Text="{x:Bind comments}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                            </StackPanel>
+                                        </Button>
+
+                                        <Button x:Name="BtnShare"
+                                   Background="Transparent"
+                                   RelativePanel.AlignRightWithPanel="True"
+                                    Margin="0,0,30,0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="&#xE19F;" 
+                                       VerticalAlignment="Center"
+                                                   FontFamily="Segoe MDL2 Assets"
+                                                   FontSize="14" 
+                                                    />
+                                                <TextBlock Text="{x:Bind shares}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </RelativePanel>
+
+                                    <Border Grid.Row="4" Height="20" Background="LightGray"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Margin" Value="0"></Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                </Grid>
+            </PivotItem>
+        </Pivot>
+        
     </Grid>
 </Page>

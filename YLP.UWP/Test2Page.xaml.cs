@@ -27,21 +27,11 @@ namespace YLP.UWP
     {
         public UArticleViewModel ViewModel { get; set; }
 
-        public ObservableCollection<People> Peoples { get; set; }
-
         public Test2Page()
         {
             ViewModel = new UArticleViewModel("", UArticleType.latest.ToString(), "");
 
             this.InitializeComponent();
-
-            Peoples = new ObservableCollection<People>();
-
-
-            for (int i = 0; i < 30; i++)
-            {
-                Peoples.Add(new People() { Id = i, Age = 20 + i, Name = "test" + i });
-            }
         }
     }
 

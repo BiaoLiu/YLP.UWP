@@ -150,9 +150,9 @@ namespace YLP.UWP
 
         private async void Refresh_OnClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.UArticles.DoRefresh();
+            ViewModel.LatestUArticles.DoRefresh();
 
-            await ViewModel.UArticles.LoadMoreItemsAsync(1);
+            await ViewModel.LatestUArticles.LoadMoreItemsAsync(1);
         }
 
         private void BackHome_OnClick(object sender, RoutedEventArgs e)

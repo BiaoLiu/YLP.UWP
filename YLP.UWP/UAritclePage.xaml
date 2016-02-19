@@ -63,7 +63,7 @@
                   Grid.Row="1"
                   SelectionMode="None"
                   IsItemClickEnabled="True"
-                  ItemsSource="{x:Bind ViewModel.UArticles}"
+                  ItemsSource="{x:Bind ViewModel.LatestUArticles}"
                   >
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="data:UArticle">

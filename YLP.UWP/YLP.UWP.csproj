@@ -105,11 +105,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converter\AvatarValueConverter.cs" />
+    <Compile Include="Converter\DateTimeToFriendlyStringConverter.cs" />
     <Compile Include="Converter\NullableBooleanToBoolean.cs" />
     <Compile Include="Helpers\PageHelper.cs" />
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Member\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -162,10 +161,6 @@
     <Page Include="AddUArticlePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Member\LoginPage.xaml">
       <Generator>MSBuild:Compile</Generator>

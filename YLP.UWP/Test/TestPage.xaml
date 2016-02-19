@@ -9,7 +9,7 @@
     xmlns:data="YLP.UWP.Core.Models">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ListView ItemsSource="{x:Bind ViewModel.UArticles}">
+        <ListView ItemsSource="{x:Bind ViewModel.LatestUArticles}">
             <!--<ListView.ItemTemplate>
                 <DataTemplate x:DataType="data:UArticle">
                         <Grid>

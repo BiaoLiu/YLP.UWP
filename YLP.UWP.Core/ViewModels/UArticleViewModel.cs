@@ -13,16 +13,35 @@ namespace YLP.UWP.Core.ViewModels
     {
         private readonly UArticleService _api = new UArticleService();
 
-        private IncrementalLoading<UArticle> _uarticles;
-        public IncrementalLoading<UArticle> UArticles
+        /// <summary>
+        /// 热门用户作品
+        /// </summary>
+        private IncrementalLoading<UArticle> _hotUarticles;
+        public IncrementalLoading<UArticle> HotUArticles
         {
             get
             {
-                return _uarticles;
+                return _hotUarticles;
             }
             set
             {
-                SetProperty(ref _uarticles, value);
+                SetProperty(ref _hotUarticles, value);
+            }
+        }
+
+        /// <summary>
+        /// 最新用户作品
+        /// </summary>
+        private IncrementalLoading<UArticle> _latestUarticles;
+        public IncrementalLoading<UArticle> LatestUArticles
+        {
+            get
+            {
+                return _latestUarticles;
+            }
+            set
+            {
+                SetProperty(ref _latestUarticles, value);
             }
         }
 
@@ -41,12 +60,16 @@ namespace YLP.UWP.Core.ViewModels
 
         public UArticleViewModel(string otherUserId, string type, string tag)
         {
-            UArticles = new IncrementalLoading<UArticle>((p, s) => _api.GetUArticles(otherUserId, type, tag, p, s));
+            //热门用户作品
+            HotUArticles = new IncrementalLoading<UArticle>((p, s) => _api.GetUArticles(otherUserId, UArticleType.hot.ToString(), tag, p, s));
+            HotUArticles.DataLoading += DataLoading;
+            HotUArticles.DataLoaded += DataLoaded;
 
-            UArticles.DataLoading += DataLoading;
-            UArticles.DataLoaded += DataLoaded;
+            //最新用户作品
+            LatestUArticles = new IncrementalLoading<UArticle>((p, s) => _api.GetUArticles(otherUserId, UArticleType.latest.ToString(), tag, p, s));
+            LatestUArticles.DataLoading += DataLoading;
+            LatestUArticles.DataLoaded += DataLoaded;
         }
-
         private void DataLoading()
         {
             IsLoading = true;
