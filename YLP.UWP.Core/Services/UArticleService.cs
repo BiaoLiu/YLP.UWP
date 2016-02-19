@@ -30,7 +30,7 @@ namespace YLP.UWP.Core.Services
             FormData.Clear();
 
             FormData["userid"] = otherUserId;
-            FormData["sid"] = LocalSetting.Current.GetValue<string>("sessionid");
+            FormData["sid"] = LocalSetting.Current.GetValue<string>("sessionid") ?? "";
             FormData["deviceId"] = DeviceHelper.GetDeviceId().ToString();
             FormData["type"] = type;
             FormData["tag"] = tag;
