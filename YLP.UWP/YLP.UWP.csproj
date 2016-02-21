@@ -105,6 +105,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Button.cs" />
     <Compile Include="Converter\AvatarValueConverter.cs" />
     <Compile Include="Converter\DateTimeToFriendlyStringConverter.cs" />
     <Compile Include="Converter\NullableBooleanToBoolean.cs" />
@@ -122,11 +123,17 @@
     <Compile Include="Test2Page.xaml.cs">
       <DependentUpon>Test2Page.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Test\ControlTemplatePage.xaml.cs">
+      <DependentUpon>ControlTemplatePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Test\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="Test\TestPage.xaml.cs">
       <DependentUpon>TestPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Test\TestStylePage.xaml.cs">
+      <DependentUpon>TestStylePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UAritclePage.xaml.cs">
       <DependentUpon>UAritclePage.xaml</DependentUpon>
@@ -178,13 +185,29 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Test\ControlTemplatePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Test\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Test\Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Test\TestPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Test\TestStylePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UAritclePage.xaml">
       <Generator>MSBuild:Compile</Generator>

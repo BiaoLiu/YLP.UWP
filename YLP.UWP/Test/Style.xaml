@@ -1,0 +1,13 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Name="Dark">
+            <SolidColorBrush x:Key="btn_bd" Color="White"/>
+        </ResourceDictionary>
+        <ResourceDictionary x:Name="Light">
+            <SolidColorBrush x:Key="btn_bd" Color="Black"/>
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+
+</ResourceDictionary>

@@ -5,4 +5,9 @@
     xmlns:local="using:YLP.UWP"
     RequestedTheme="Light">
 
+    <Application.Resources>
+        <x:Double x:Key="btn_width">200</x:Double>
+    </Application.Resources>
+    
+    
 </Application>
