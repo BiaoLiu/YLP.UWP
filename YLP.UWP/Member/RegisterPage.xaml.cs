@@ -67,7 +67,7 @@ namespace YLP.UWP.Member
 
         private void AddUArticle_OnClick(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(AddUArticlePage));
+           // Frame.Navigate(typeof(AddUArticlePage));
         }
 
         private async void UpdateAvatarAll_OnClick(object sender, RoutedEventArgs e)

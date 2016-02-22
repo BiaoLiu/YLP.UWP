@@ -20,6 +20,7 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
+                <TextBlock x:Name="UArticleId" Visibility="Collapsed" Text="{x:Bind articleid}"/>
                 <RelativePanel>
                     <StackPanel Orientation="Horizontal" Padding="0,20,0,0">
                         <Ellipse Width="50" Height="50">
@@ -34,16 +35,17 @@
                             </Grid.RowDefinitions>
                             <TextBlock Text="{x:Bind username}" Margin="10,5,0,0"/>
                             <StackPanel Grid.Row="1" Orientation="Horizontal">
-                                <TextBlock  Text="{x:Bind pubtime,Converter={StaticResource TimeFormatter}}" Margin="10,0,0,0"/>
-                                <TextBlock Text="来自" Margin="20,0,0,0"/>
-                                <TextBlock Text="{x:Bind tool}"/>
+                                <TextBlock  Text="{x:Bind pubtime,Converter={StaticResource TimeFormatter}}" Margin="10,0,0,0" FontSize="12"/>
+                                <TextBlock Text="来自" Margin="20,0,0,0" FontSize="12"/>
+                                <TextBlock Text="{x:Bind tool}" FontSize="12"/>
                             </StackPanel>
                         </Grid>
                     </StackPanel>
                     <TextBlock RelativePanel.AlignRightWithPanel="True" Text="test"/>
                 </RelativePanel>
                 <TextBlock Margin="0,20,0,0" Grid.Row="1" Text="{x:Bind title}"/>
-                <Image Margin="0,20,0,0" Grid.Row="2" Source="{x:Bind pics.url}"/>
+                <Image Margin="0,20,0,0" Grid.Row="2" Source="{x:Bind picurl}"/>
+
                 <RelativePanel Grid.Row="3"
                               BorderBrush="AliceBlue"
                               BorderThickness="0,1,0,0"
@@ -51,7 +53,8 @@
                     <Button x:Name="BtnGoods" 
                                 Background="Transparent"
                                 RelativePanel.AlignLeftWithPanel="True"
-                                Margin="30,0,0,0">
+                                Margin="30,0,0,0"
+                                Click="BtnGoods_OnClick">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="&#xE19F;"
                                        VerticalAlignment="Center"
@@ -65,7 +68,7 @@
                                 Background="Transparent"
                                 RelativePanel.AlignHorizontalCenterWithPanel="True">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="&#xE19F;" 
+                            <TextBlock Text="&#xE90A;" 
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                                    FontFamily="Segoe MDL2 Assets"
@@ -77,9 +80,9 @@
                     <Button x:Name="BtnShare"
                                    Background="Transparent"
                                    RelativePanel.AlignRightWithPanel="True"
-                                    Margin="0,0,30,0">
+                                   Margin="0,0,30,0">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="&#xE19F;" 
+                            <TextBlock Text="&#xE72D;" 
                                        VerticalAlignment="Center"
                                                    FontFamily="Segoe MDL2 Assets"
                                                    FontSize="14" 
@@ -102,7 +105,6 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-
                     <RelativePanel>
                         <Button FontFamily="Segoe MDL2 Assets"
                 FontSize="20"
@@ -111,12 +113,10 @@
                 Background="Transparent" 
                 Content="&#xE117;"/>
                     </RelativePanel>
-
                     <ListView  Grid.Row="1" 
                                ItemsSource="{x:Bind ViewModel.HotUArticles}" 
                                 ItemTemplate="{StaticResource UArticleTemplate}"
                                SelectionMode="None">
-
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -157,6 +157,9 @@
                 </Grid>
             </PivotItem>
         </Pivot>
-        
+        <ProgressRing Grid.RowSpan="2" 
+                      IsActive="{x:Bind ViewModel.IsLoading,Mode=OneWay}"
+                      Width="50"
+                      Height="50"/>
     </Grid>
 </Page>

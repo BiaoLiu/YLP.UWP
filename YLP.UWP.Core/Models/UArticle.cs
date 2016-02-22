@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +20,25 @@ namespace YLP.UWP.Core.Models
         public string title { get; set; }
 
         public Picture pics { get; set; }
+
+        /// <summary>
+        /// 缩略图
+        /// </summary>
+        public string picurl
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(pics.url))
+                {
+                    var fileName = Path.GetFileNameWithoutExtension(pics.url);
+                    var thumbFileName = fileName + "-thumb";
+
+                    return pics.url.Replace(fileName, thumbFileName);
+                }
+
+                return string.Empty;
+            }
+        }
 
         public int piccount { get; set; }
 
