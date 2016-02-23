@@ -20,50 +20,17 @@ namespace YLP.UWP.ViewModels
         /// <summary>
         /// 轮播图
         /// </summary>
-        private ObservableCollection<SlideArticle> _slideArticles;
-        public ObservableCollection<SlideArticle> SlideArticles
-        {
-            get
-            {
-                return _slideArticles;
-            }
-            set
-            {
-                SetProperty(ref _slideArticles, value);
-            }
-        }
+        public ObservableCollection<SlideArticle> SlideArticles { get; set; }
 
         /// <summary>
         /// R3区域文章(单图)
         /// </summary>
-        private IncrementalLoading<ArticleV2> _r3Articles;
-        public IncrementalLoading<ArticleV2> R3Aritcles
-        {
-            get
-            {
-                return _r3Articles;
-            }
-            set
-            {
-                SetProperty(ref _r3Articles, value);
-            }
-        }
+        public IncrementalLoading<ArticleV2> R3Aritcles { get; set; }
 
         /// <summary>
         /// R2区域文章(多图)
         /// </summary>
-        private IncrementalLoading<ArticleV2> _r2Articles;
-        public IncrementalLoading<ArticleV2> R2Articles
-        {
-            get
-            {
-                return _r2Articles;
-            }
-            set
-            {
-                SetProperty(ref _r2Articles, value);
-            }
-        }
+        public IncrementalLoading<ArticleV2> R2Articles { get; set; }
 
         public MainViewModel()
         {

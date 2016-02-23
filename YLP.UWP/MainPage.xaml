@@ -6,8 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    xmlns:data="YLP.UWP.Core.Models"
-    DataContext="{Binding ViewModel,RelativeSource={RelativeSource Self}}">
+    xmlns:data="using:YLP.UWP.Core.Models">
+
 
     <Page.Resources>
         <local:NullableBooleanToBoolean x:Key="NullableBooleanToBoolean"/>
@@ -125,28 +125,28 @@
                                     <VisualState x:Name="Selected">
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="dotEllipse" Storyboard.TargetProperty="Fill">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Blue" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="OrangeRed" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="SelectedUnfocused">
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="dotEllipse" Storyboard.TargetProperty="Fill">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Blue" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="OrangeRed" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="SelectedPointerOver">
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="dotEllipse" Storyboard.TargetProperty="Fill">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Blue" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="OrangeRed" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="SelectedPressed">
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="dotEllipse" Storyboard.TargetProperty="Fill">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Blue" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="OrangeRed" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -229,70 +229,74 @@
             </SplitView.Pane>
 
             <SplitView.Content>
-                <Grid>
-                   
+                <Grid >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="500"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-
                     <Pivot>
-                    <PivotItem Header="推荐">
-                            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                                <ListView>
-                                    <ListView.Header>
-                                        <Grid Height="200">
-                                            <FlipView x:Name="flipView" ItemsSource="{Binding SlideArticles}">
-                                                <FlipView.ItemTemplate>
-                                                    <DataTemplate>
-                                                       <Grid>
-                                                            <Image Width="" Source="{Binding pics.url}"  Stretch="UniformToFill"/>
-                                                           <Border Height="30" VerticalAlignment="Bottom">
-                                                                <TextBlock Text="{Binding title}" FontFamily="Segoe UI" FontSize="14" Foreground="#CCFFFFFF" Padding="15,0"/>
-                                                           </Border>
-                                                       </Grid>
-                                                    </DataTemplate>
-                                                </FlipView.ItemTemplate>
-                                            </FlipView>
-
-                                            <ListBox x:Name="listBox"
-                                                     Margin="0,0,0,8"
-                                                     HorizontalAlignment="Right"
+                        <PivotItem Header="推荐" Margin="0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                           
+                            <Grid Height="200" VerticalAlignment="Top">
+                                <FlipView x:Name="flipView" ItemsSource="{x:Bind ViewModel.SlideArticles}">
+                                    <FlipView.ItemTemplate>
+                                        <DataTemplate x:DataType="data:SlideArticle">
+                                            <Grid>
+                                                <Image Width="" Source="{x:Bind pics.url}"  Stretch="UniformToFill"/>
+                                                <Border Height="30" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20">
+                                                    <TextBlock Text="{x:Bind title}" FontFamily="Segoe UI" FontSize="18" Foreground="#CCFFFFFF" Padding="15,0" TextWrapping="Wrap"/>
+                                                </Border>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </FlipView.ItemTemplate>
+                                </FlipView>
+                                <ListBox x:Name="listBox"
+                                                     Margin="0,0,0,3"
+                                                     HorizontalAlignment="Center"
                                                      VerticalAlignment="Bottom"
                                                      Background="Transparent"
                                                      ItemContainerStyle="{StaticResource DotListBoxItemStyle}"
-                                                     ItemsSource="{Binding SlideArticles}"
-                                                     SelectedIndex="{Binding ElementName=flipView, Path=SelectedIndex, Mode=TwoWay}"
-                                                       >
-                                                <ListBox.ItemsPanel>
-                                                    <ItemsPanelTemplate>
-                                                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" />
-                                                    </ItemsPanelTemplate>
-                                                </ListBox.ItemsPanel>
+                                                     ItemsSource="{x:Bind ViewModel.SlideArticles}"
+                                                     SelectedIndex="{Binding ElementName=flipView, Path=SelectedIndex, Mode=TwoWay}">
 
-                                                <ListBox.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <Ellipse Width="1"
-                                                                 Height="1"
-                                                                 Fill="White" />
-                                                    </DataTemplate>
-                                                </ListBox.ItemTemplate>
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
 
-                                            </ListBox>
-                                        </Grid>
-
-                                    </ListView.Header>
-                         
-                                </ListView>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Ellipse Width="1"
+                                                     Height="1"
+                                                     Fill="White" />
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
                             </Grid>
-
+                                <Grid Grid.Row="1">
+                                  <ListView ItemsSource="{x:Bind ViewModel.}">
+                                      <ListView.ItemTemplate>
+                                          <DataTemplate>
+                                              
+                                          </DataTemplate>
+                                      </ListView.ItemTemplate>
+                                  </ListView>
+                                </Grid>
+                            </Grid>
                         </PivotItem>
+                        
                         <PivotItem Header="专题">
                             
                         </PivotItem>
                     </Pivot>
                     
-                    <Frame x:Name="FramePage" Grid.Column="1"/>
+                    <Frame BorderBrush="AliceBlue" BorderThickness="1,0,0,0" x:Name="FramePage" Grid.Column="1"/>
                 </Grid>
             </SplitView.Content>
         </SplitView>
