@@ -53,7 +53,7 @@ namespace YLP.UWP.Core.Https
         #endregion
 
         #region 用户作品模块
-       
+
         /// <summary>
         /// 获取用户作品列表
         /// </summary>
@@ -62,7 +62,7 @@ namespace YLP.UWP.Core.Https
         /// <summary>
         /// 新增用户作品
         /// </summary>
-        public const string UArticle_CreateUArticle = Host + "api/task-createtask"; 
+        public const string UArticle_CreateUArticle = Host + "api/task-createtask";
 
         #endregion
 
@@ -70,6 +70,12 @@ namespace YLP.UWP.Core.Https
         /// 创建用户行为
         /// </summary>
         public const string Common_CreateUserAction = Host + "api/common-createuseraction";
+
+
+        /// <summary>
+        /// 获取评论列表
+        /// </summary>
+        public const string Comment_CommentList = Host + "api/comment-getcommentlist";
 
         /// <summary>
         /// 新增评论

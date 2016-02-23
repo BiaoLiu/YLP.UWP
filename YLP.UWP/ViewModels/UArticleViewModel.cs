@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YLP.UWP.Core;
 using YLP.UWP.Core.Common;
 using YLP.UWP.Core.Models;
 using YLP.UWP.Core.Services;
+using YLP.UWP.Core.ViewModels;
 
-namespace YLP.UWP.Core.ViewModels
+namespace YLP.UWP.ViewModels
 {
     public class UArticleViewModel : ViewModelBase
     {
@@ -16,34 +18,17 @@ namespace YLP.UWP.Core.ViewModels
         /// <summary>
         /// 热门用户作品
         /// </summary>
-        private IncrementalLoading<UArticle> _hotUarticles;
-        public IncrementalLoading<UArticle> HotUArticles
-        {
-            get
-            {
-                return _hotUarticles;
-            }
-            set
-            {
-                SetProperty(ref _hotUarticles, value);
-            }
-        }
-
+        public IncrementalLoading<UArticle> HotUArticles { get; set; }
+    
         /// <summary>
         /// 最新用户作品
         /// </summary>
-        private IncrementalLoading<UArticle> _latestUarticles;
-        public IncrementalLoading<UArticle> LatestUArticles
-        {
-            get
-            {
-                return _latestUarticles;
-            }
-            set
-            {
-                SetProperty(ref _latestUarticles, value);
-            }
-        }
+        public IncrementalLoading<UArticle> LatestUArticles { get; set; }
+
+        /// <summary>
+        /// 关注用户作品
+        /// </summary>
+        public IncrementalLoading<UArticle> AttentionUArticles { get; set; }
 
         private bool _isLoading;
         public bool IsLoading
@@ -58,7 +43,7 @@ namespace YLP.UWP.Core.ViewModels
             }
         }
 
-        public UArticleViewModel(string otherUserId, string type, string tag)
+        public UArticleViewModel(string otherUserId, string tag)
         {
             //热门用户作品
             HotUArticles = new IncrementalLoading<UArticle>((p, s) => _api.GetUArticles(otherUserId, UArticleType.hot.ToString(), tag, p, s));
@@ -69,6 +54,11 @@ namespace YLP.UWP.Core.ViewModels
             LatestUArticles = new IncrementalLoading<UArticle>((p, s) => _api.GetUArticles(otherUserId, UArticleType.latest.ToString(), tag, p, s));
             LatestUArticles.DataLoading += DataLoading;
             LatestUArticles.DataLoaded += DataLoaded;
+
+            //关注用户作品
+            AttentionUArticles = new IncrementalLoading<UArticle>((p, s) => _api.GetUArticles(otherUserId, UArticleType.focus.ToString(), tag, p, s));
+            AttentionUArticles.DataLoading += DataLoading;
+            AttentionUArticles.DataLoaded += DataLoaded;
         }
         private void DataLoading()
         {

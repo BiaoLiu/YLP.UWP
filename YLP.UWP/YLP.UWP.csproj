@@ -102,10 +102,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Button.cs" />
+    <Compile Include="CommentPage.xaml.cs">
+      <DependentUpon>CommentPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converter\AvatarValueConverter.cs" />
     <Compile Include="Converter\DateTimeToFriendlyStringConverter.cs" />
     <Compile Include="Converter\NullableBooleanToBoolean.cs" />
+    <Compile Include="Converter\UserActionStatusConverter.cs" />
     <Compile Include="Helpers\PageHelper.cs" />
     <Compile Include="Helpers\VisualTreeHelper.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -133,6 +136,12 @@
     <Compile Include="UpdateAvatar.xaml.cs">
       <DependentUpon>UpdateAvatar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AriticleViewModel.cs" />
+    <Compile Include="ViewModels\CommentViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\UArticleViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -157,6 +166,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="CommentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -180,10 +193,6 @@
     <Page Include="Test\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="UAritclePage.xaml">
       <Generator>MSBuild:Compile</Generator>

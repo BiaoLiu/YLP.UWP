@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace YLP.UWP.Core
 {
-    public enum MemberEnum
+    public enum MemberEdit
     {
         /// <summary>
         /// 地址
@@ -63,5 +63,12 @@ namespace YLP.UWP.Core
         focus,
 
         focuscancel
+    }
+
+    public enum SortType
+    {
+        latest,
+
+        hot
     }
 }

@@ -24,8 +24,8 @@ using YLP.UWP.Core;
 using YLP.UWP.Core.Https;
 using YLP.UWP.Core.Models;
 using YLP.UWP.Core.Services;
-using YLP.UWP.Core.ViewModels;
 using YLP.UWP.Member;
+using YLP.UWP.ViewModels;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -39,7 +39,7 @@ namespace YLP.UWP
         public UArticleViewModel ViewModel;
         public UAritclePage()
         {
-            ViewModel = new UArticleViewModel("", UArticleType.latest.ToString(), "");
+            ViewModel = new UArticleViewModel("", "");
 
             this.InitializeComponent();
         }

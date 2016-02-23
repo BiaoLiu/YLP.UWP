@@ -129,8 +129,8 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="OperateCodeEnum.cs" />
     <Compile Include="OperationResult.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\CommentService.cs" />
     <Compile Include="Services\CommonService.cs" />
     <Compile Include="Services\MainService.cs" />
     <Compile Include="Services\MemberService.cs" />
@@ -140,11 +140,6 @@
     <Compile Include="Utilities\EncryptHelper.cs" />
     <Compile Include="Utilities\EnumHelper.cs" />
     <Compile Include="Utilities\FileHelper.cs" />
-    <Compile Include="ViewModels\AriticleViewModel.cs" />
-    <Compile Include="ViewModels\LoginViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\UArticleViewModel.cs" />
-    <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <EmbeddedResource Include="Properties\YLP.UWP.Core.rd.xml" />
   </ItemGroup>

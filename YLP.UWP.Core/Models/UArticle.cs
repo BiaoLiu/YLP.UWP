@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using YLP.UWP.Core.Annotations;
 
 namespace YLP.UWP.Core.Models
 {
@@ -42,21 +45,88 @@ namespace YLP.UWP.Core.Models
 
         public int piccount { get; set; }
 
-        public int goods { get; set; }
+        private int _goods;
+        public int goods
+        {
+            get
+            {
+                return _goods;
+            }
+            set
+            {
+                SetProperty(ref _goods, value);
+            }
+        }
 
-        public int shares { get; set; }
+        private int _shares;
+        public int shares
+        {
+            get
+            {
+                return _shares;
+            }
+            set
+            {
+                SetProperty(ref _shares, value);
+            }
+        }
 
-        public int comments { get; set; }
+        private int _comments;
+        public int comments
+        {
+            get
+            {
+                return _comments;
+            }
+            set
+            {
+                SetProperty(ref _comments, value);
+            }
+        }
 
         public int hits { get; set; }
 
         public int favorites { get; set; }
 
-        public bool favioritestatus { get; set; }
+        private bool _favioritestatus;
+        public bool favioritestatus
+        {
+            get
+            {
+                return _favioritestatus;
+            }
+            set
+            {
+                SetProperty(ref _favioritestatus, value);
+            }
+        }
 
-        public bool attentionstatus { get; set; }
+        private bool _attentionstatus;
+        public bool attentionstatus
+        {
+            get
+            {
+                return _attentionstatus;
 
-        public bool goodstatus { get; set; }
+            }
+            set
+            {
+                SetProperty(ref _attentionstatus, value);
+            }
+        }
+
+        private bool _goodstatus;
+        public bool goodstatus
+        {
+            get
+            {
+                return _goodstatus;
+            }
+            set
+            {
+                SetProperty(ref _goodstatus, value);
+            }
+        }
 
         public bool isgood { get; set; }
 

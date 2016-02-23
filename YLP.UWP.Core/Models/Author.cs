@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YLP.UWP.Core.ViewModels;
 
 namespace YLP.UWP.Core.Models
 {
-    public class Author
+    public class Author : ViewModelBase
     {
         public string userid { get; set; }
 

@@ -9,8 +9,9 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using YLP.UWP.Core.Common;
 using YLP.UWP.Core.Services;
+using YLP.UWP.Core.ViewModels;
 
-namespace YLP.UWP.Core.ViewModels
+namespace YLP.UWP.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {

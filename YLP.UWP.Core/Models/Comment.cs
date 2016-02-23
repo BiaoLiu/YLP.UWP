@@ -16,13 +16,35 @@ namespace YLP.UWP.Core.Models
 
         public string pubtime { get; set; }
 
-        public int commentgoods { get; set; }
+        private int _commentgoods;
+        public int commentgoods
+        {
+            get
+            {
+                return _commentgoods;
+            }
+            set
+            {
+                SetProperty(ref _commentgoods, value);
+            }
+        }
 
         public string atuserid { get; set; }
 
         public string atcommentid { get; set; }
 
-        public bool goodstatus { get; set; }
+        private bool _goodstatus;
+        public bool goodstatus
+        {
+            get
+            {
+                return _goodstatus;
+            }
+            set
+            {
+                SetProperty(ref _goodstatus, value);
+            }
+        }
 
         public int floor { get; set; }
 

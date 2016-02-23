@@ -230,12 +230,13 @@
 
             <SplitView.Content>
                 <Grid>
+                   
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="500"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Pivot Title="娱乐帮">
+                    <Pivot>
                     <PivotItem Header="推荐">
                             <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                                 <ListView>
@@ -245,8 +246,8 @@
                                                 <FlipView.ItemTemplate>
                                                     <DataTemplate>
                                                        <Grid>
-                                                            <Image Width="480" Height="270" Source="{Binding pics.url}"  Stretch="UniformToFill"/>
-                                                           <Border Background="#A5000000" Height="30" VerticalAlignment="Bottom">
+                                                            <Image Width="" Source="{Binding pics.url}"  Stretch="UniformToFill"/>
+                                                           <Border Height="30" VerticalAlignment="Bottom">
                                                                 <TextBlock Text="{Binding title}" FontFamily="Segoe UI" FontSize="14" Foreground="#CCFFFFFF" Padding="15,0"/>
                                                            </Border>
                                                        </Grid>

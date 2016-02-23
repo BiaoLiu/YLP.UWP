@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YLP.UWP.Core.ViewModels
+namespace YLP.UWP.ViewModels
 {
     public class UserViewModel
     {
