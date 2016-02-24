@@ -6,8 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    xmlns:data="using:YLP.UWP.Core.Models">
-
+    xmlns:data="using:YLP.UWP.Core.Models"
+    xmlns:data2="using:YLP.UWP.ViewModels">
 
     <Page.Resources>
         <local:NullableBooleanToBoolean x:Key="NullableBooleanToBoolean"/>
@@ -163,6 +163,8 @@
             </Setter>
         </Style>
 
+        
+        <local:MainDataTemplateSelector x:Key="MainDataTemplateSelector"/>
     </Page.Resources>
 
         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -280,14 +282,31 @@
                                 </ListBox>
                             </Grid>
                                 <Grid Grid.Row="1">
-                                  <ListView ItemsSource="{x:Bind ViewModel.}">
-                                      <ListView.ItemTemplate>
-                                          <DataTemplate>
-                                              
-                                          </DataTemplate>
-                                      </ListView.ItemTemplate>
+                                    <ListView ItemsSource="{x:Bind ViewModel.Articles}">
+                                     <ListView.ItemTemplateSelector>
+                                            <local:MainDataTemplateSelector>
+                                                <local:MainDataTemplateSelector.R2ArtilceTemplate>
+                                                    <DataTemplate x:DataType="data:ArticleV2">
+                                                        <StackPanel>
+                                                            <Image Source="{x:Bind pics[0].url}"/>
+                                                            <TextBlock Text="R2"/>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </local:MainDataTemplateSelector.R2ArtilceTemplate>
+
+                                                <local:MainDataTemplateSelector.R3ArticleTemplate>
+                                                    <DataTemplate x:DataType="data:ArticleV2">
+                                                        <StackPanel>
+                                                            <Image Source="{x:Bind pics[0].url}"/>
+                                                            <TextBlock Text="R3"/>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </local:MainDataTemplateSelector.R3ArticleTemplate>
+                                            </local:MainDataTemplateSelector>
+                                        </ListView.ItemTemplateSelector>
                                   </ListView>
                                 </Grid>
+
                             </Grid>
                         </PivotItem>
                         
