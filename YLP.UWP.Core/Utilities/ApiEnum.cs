@@ -6,6 +6,15 @@ using System.Threading.Tasks;
 
 namespace YLP.UWP.Core
 {
+    public enum RegionType
+    {
+        R2,
+
+        R3,
+
+        R4
+    }
+
     public enum MemberEdit
     {
         /// <summary>

@@ -27,7 +27,7 @@ namespace YLP.UWP.Core.Common
 
         public event DataLoadingEventHandler DataLoading;
         public event DataLoadedEventHandler DataLoaded;
-        public ResultProcessDelegate<T> ResultProcess; 
+        public ResultProcessDelegate<T> ResultProcessDelegate;
 
         /// <summary>
         /// 总条数
@@ -105,15 +105,15 @@ namespace YLP.UWP.Core.Common
                     var result = await dataFetchDelegate(_pageIndex, pageSize);
                     list.AddRange(result.Data);
                 }
-
-                ResultProcess?.Invoke(list);
+                //结果处理
+                ResultProcessDelegate?.Invoke(list);
             }
             catch (Exception ex)
             {
                 HasMoreItems = false;
             }
 
-            if (list != null && list.Any())
+            if (list.Any())
             {
                 actualCount = list.Count;
                 TotalCount += actualCount;

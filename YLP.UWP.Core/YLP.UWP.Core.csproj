@@ -123,6 +123,7 @@
     <Compile Include="Models\ArticleV2.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\MainModelBase.cs" />
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\SlideArticle.cs" />
     <Compile Include="Models\UArticle.cs" />

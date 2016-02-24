@@ -163,8 +163,9 @@
             </Setter>
         </Style>
 
-        
+
         <local:MainDataTemplateSelector x:Key="MainDataTemplateSelector"/>
+
     </Page.Resources>
 
         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -283,10 +284,10 @@
                             </Grid>
                                 <Grid Grid.Row="1">
                                     <ListView ItemsSource="{x:Bind ViewModel.Articles}">
-                                     <ListView.ItemTemplateSelector>
+                                        <ListView.ItemTemplateSelector>
                                             <local:MainDataTemplateSelector>
                                                 <local:MainDataTemplateSelector.R2ArtilceTemplate>
-                                                    <DataTemplate x:DataType="data:ArticleV2">
+                                                    <DataTemplate x:DataType="data:MainModelBase">
                                                         <StackPanel>
                                                             <Image Source="{x:Bind pics[0].url}"/>
                                                             <TextBlock Text="R2"/>
@@ -295,16 +296,25 @@
                                                 </local:MainDataTemplateSelector.R2ArtilceTemplate>
 
                                                 <local:MainDataTemplateSelector.R3ArticleTemplate>
-                                                    <DataTemplate x:DataType="data:ArticleV2">
+                                                    <DataTemplate x:DataType="data:MainModelBase">
                                                         <StackPanel>
                                                             <Image Source="{x:Bind pics[0].url}"/>
                                                             <TextBlock Text="R3"/>
                                                         </StackPanel>
                                                     </DataTemplate>
                                                 </local:MainDataTemplateSelector.R3ArticleTemplate>
+                                                
+                                                <local:MainDataTemplateSelector.UArticleTemplate>
+                                                    <DataTemplate x:DataType="data:MainModelBase">
+                                                        <StackPanel>
+                                                            <Image Source="{x:Bind pics[0].url}"/>
+                                                            <TextBlock Text="用户作品"/>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </local:MainDataTemplateSelector.UArticleTemplate>
                                             </local:MainDataTemplateSelector>
                                         </ListView.ItemTemplateSelector>
-                                  </ListView>
+                                    </ListView>
                                 </Grid>
 
                             </Grid>
