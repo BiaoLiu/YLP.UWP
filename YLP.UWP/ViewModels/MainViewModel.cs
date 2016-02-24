@@ -45,6 +45,7 @@ namespace YLP.UWP.ViewModels
             //R2Articles = new IncrementalLoading<ArticleV2>(5, (pageIndex, pageSize) => _api.GetR2ArticleList(pageIndex, pageSize));
 
             Articles = new IncrementalLoading<ArticleV2>(new int[] { 35, 5 }, (p, s) => _api.GetR3ArticleList(p, s), (p, s) => _api.GetR2ArticleList(p, s));
+            Articles.ResultProcess = Test;
 
             Update();
         }
@@ -57,15 +58,16 @@ namespace YLP.UWP.ViewModels
         }
 
 
-        public void Test()
+        public void Test(List<ArticleV2> articles )
         {
-            var r2Article = Articles.Where(a => a.region == "R2").ToList();
+
+            var r2Article = articles.Where(a => a.region == "R2").ToList();
             var r2Count = r2Article.Count();
 
-            var r3Article = Articles.Where(a => a.region == "R3").ToList();
+            var r3Article = articles.Where(a => a.region == "R3").ToList();
             var r3Count = r3Article.Count();
 
-            Articles.Clear();
+            articles.Clear();
 
             int r3 = 0;
             int u = 0;
@@ -78,12 +80,12 @@ namespace YLP.UWP.ViewModels
                         break;
                     }
 
-                    Articles.Add(r3Article[r3]);
+                    articles.Add(r3Article[r3]);
                 }
 
                 //输出i
 
-                Articles.Add(r2Article[i]);
+                articles.Add(r2Article[i]);
 
                 for (; u < u + 1; u++)
                 {
@@ -92,7 +94,7 @@ namespace YLP.UWP.ViewModels
 
                 for (; r3 < r3 + 4; r3++)
                 {
-                    Articles.Add(r3Article[r3]);
+                    articles.Add(r3Article[r3]);
                 }
             }
 

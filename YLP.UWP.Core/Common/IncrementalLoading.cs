@@ -27,6 +27,7 @@ namespace YLP.UWP.Core.Common
 
         public event DataLoadingEventHandler DataLoading;
         public event DataLoadedEventHandler DataLoaded;
+        public ResultProcessDelegate<T> ResultProcess; 
 
         /// <summary>
         /// 总条数
@@ -105,6 +106,7 @@ namespace YLP.UWP.Core.Common
                     list.AddRange(result.Data);
                 }
 
+                ResultProcess?.Invoke(list);
             }
             catch (Exception ex)
             {
@@ -136,4 +138,6 @@ namespace YLP.UWP.Core.Common
     public delegate void DataLoadingEventHandler();
 
     public delegate void DataLoadedEventHandler();
+
+    public delegate void ResultProcessDelegate<T>(List<T> result);
 }
