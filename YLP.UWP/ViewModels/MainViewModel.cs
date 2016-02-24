@@ -73,7 +73,8 @@ namespace YLP.UWP.ViewModels
             int u = 0;
             for (int i = 0; i < r2Count; i++)
             {
-                for (; r3 < r3 + 3; r3++)
+                var index = r3;
+                for (; r3 < index + 3; r3++)
                 {
                     if (r3Count <= r3)
                     {
@@ -87,13 +88,19 @@ namespace YLP.UWP.ViewModels
 
                 articles.Add(r2Article[i]);
 
-                for (; u < u + 1; u++)
-                {
+                //for (; u < u + 1; u++)
+                //{
 
-                }
+                //}
 
-                for (; r3 < r3 + 4; r3++)
+                index = r3;
+                for (; r3 < index + 4; r3++)
                 {
+                    if (r3Count <= r3)
+                    {
+                        break;
+                    }
+
                     articles.Add(r3Article[r3]);
                 }
             }
