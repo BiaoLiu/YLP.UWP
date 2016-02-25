@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.Storage.Streams;
 using Windows.Web.Http;
@@ -17,6 +18,9 @@ namespace YLP.UWP.Core.Https
 {
     public static class BaseService
     {
+        //超时网络请求控制
+        private readonly static CancellationTokenSource Cts=new CancellationTokenSource(30*1000);
+
         /// <summary>
         /// 发送GET请求 返回服务器回复数据(string)
         /// </summary>
@@ -29,15 +33,27 @@ namespace YLP.UWP.Core.Https
                 HttpClient client = new HttpClient();
                 Uri uri = new Uri(url);
 
-                HttpResponseMessage response = await client.GetAsync(uri);
+                HttpResponseMessage response = await client.GetAsync(uri).AsTask(Cts.Token);
                 response.EnsureSuccessStatusCode();
 
-                return await response.Content.ReadAsStringAsync();
+                return await response.Content.ReadAsStringAsync().AsTask(Cts.Token);
             }
+            catch (TaskCanceledException)
+            {
+                
+            }
+
             catch (Exception)
             {
                 return null;
             }
+
+            if (Cts.Token.CanBeCanceled)
+            {
+                Cts.Cancel();
+            }
+
+         //   await Dispatcher
         }
 
         /// <summary>
