@@ -7,11 +7,10 @@ using YLP.UWP.Core;
 using YLP.UWP.Core.Common;
 using YLP.UWP.Core.Models;
 using YLP.UWP.Core.Services;
-using YLP.UWP.Core.ViewModels;
 
 namespace YLP.UWP.ViewModels
 {
-    public class UArticleViewModel : ViewModelBase
+    public class UArticleViewModel : BindableBase
     {
         private readonly UArticleService _api = new UArticleService();
 

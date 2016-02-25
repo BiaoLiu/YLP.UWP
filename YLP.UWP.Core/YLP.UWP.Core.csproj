@@ -110,6 +110,7 @@
     <Compile Include="Attributes\DisplayNameAttribute.cs" />
     <Compile Include="Common\Command.cs" />
     <Compile Include="Common\NotifyPropertyChanged.cs" />
+    <Compile Include="Common\BindableBase.cs" />
     <Compile Include="Data\LocalSetting.cs" />
     <Compile Include="Data\SingletonProvider.cs" />
     <Compile Include="DeviceHelper.cs" />
@@ -141,7 +142,6 @@
     <Compile Include="Utilities\EncryptHelper.cs" />
     <Compile Include="Utilities\EnumHelper.cs" />
     <Compile Include="Utilities\FileHelper.cs" />
-    <Compile Include="ViewModels\ViewModelBase.cs" />
     <EmbeddedResource Include="Properties\YLP.UWP.Core.rd.xml" />
   </ItemGroup>
   <ItemGroup>

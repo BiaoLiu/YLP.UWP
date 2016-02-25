@@ -8,11 +8,10 @@ using YLP.UWP.Core;
 using YLP.UWP.Core.Common;
 using YLP.UWP.Core.Models;
 using YLP.UWP.Core.Services;
-using YLP.UWP.Core.ViewModels;
 
 namespace YLP.UWP.ViewModels
 {
-    public class CommentViewModel : ViewModelBase
+    public class CommentViewModel : BindableBase
     {
         private readonly CommonService _api = new CommonService();
 

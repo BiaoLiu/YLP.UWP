@@ -10,11 +10,10 @@ using YLP.UWP.Core;
 using YLP.UWP.Core.Common;
 using YLP.UWP.Core.Models;
 using YLP.UWP.Core.Services;
-using YLP.UWP.Core.ViewModels;
 
 namespace YLP.UWP.ViewModels
 {
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : BindableBase
     {
         private readonly MainService _api = new MainService();
 
@@ -24,14 +23,14 @@ namespace YLP.UWP.ViewModels
         public ObservableCollection<SlideArticle> SlideArticles { get; set; }
 
         /// <summary>
-        /// R3区域文章(单图)
-        /// </summary>
-        public IncrementalLoading<ArticleV2> R3Aritcles { get; set; }
+        ///// R3区域文章(单图)
+        ///// </summary>
+        //public IncrementalLoading<ArticleV2> R3Aritcles { get; set; }
 
-        /// <summary>
-        /// R2区域文章(多图)
-        /// </summary>
-        public IncrementalLoading<ArticleV2> R2Articles { get; set; }
+        ///// <summary>
+        ///// R2区域文章(多图)
+        ///// </summary>
+        //public IncrementalLoading<ArticleV2> R2Articles { get; set; }
 
         public IncrementalLoading<MainModelBase> Articles { get; set; }
 

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using YLP.UWP.Core.ViewModels;
+using YLP.UWP.Core.Common;
 
 namespace YLP.UWP.Core.Models
 {
-    public class Author : ViewModelBase
+    public class Author : BindableBase
     {
         public string userid { get; set; }
 

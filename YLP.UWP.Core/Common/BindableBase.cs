@@ -6,14 +6,13 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using YLP.UWP.Core.Common;
 
-namespace YLP.UWP.Core.ViewModels
+namespace YLP.UWP.Core.Common
 {
     /// <summary>
     /// 视图模型基类
     /// </summary>
-    public abstract class ViewModelBase : NotifyPropertyChanged
+    public abstract class BindableBase : NotifyPropertyChanged
     {
         /// <summary>
         /// 设置属性变化，内部通知修改
