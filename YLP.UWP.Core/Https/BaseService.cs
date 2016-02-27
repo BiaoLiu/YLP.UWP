@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -38,20 +39,20 @@ namespace YLP.UWP.Core.Https
 
                 return await response.Content.ReadAsStringAsync().AsTask(Cts.Token);
             }
-            catch (TaskCanceledException)
-            {
+            //catch (TaskCanceledException)
+            //{
                 
-            }
+            //}
 
             catch (Exception)
             {
                 return null;
             }
 
-            if (Cts.Token.CanBeCanceled)
-            {
-                Cts.Cancel();
-            }
+            //if (Cts.Token.CanBeCanceled)
+            //{
+            //    Cts.Cancel();
+            //}
 
          //   await Dispatcher
         }
@@ -72,7 +73,8 @@ namespace YLP.UWP.Core.Https
                 HttpResponseMessage response = await client.PostAsync(uri, new HttpFormUrlEncodedContent(formData));
                 response.EnsureSuccessStatusCode();
 
-                return await response.Content.ReadAsStringAsync();
+                var buffer = await response.Content.ReadAsBufferAsync();
+                 return Encoding.UTF8.GetString(buffer.ToArray());
             }
             catch (Exception)
             {

@@ -91,13 +91,6 @@ namespace YLP.UWP.ViewModels
                 //一张多图
                 articles.Add(r2Article[i]);
 
-                //一张用户作品
-                if (uCount <= u)
-                {
-                    break;
-                }
-                articles.Add(uArticle[u++]);
-
                 //四张单图
                 index = r3;
                 for (; r3 < index + 4; r3++)
@@ -108,6 +101,13 @@ namespace YLP.UWP.ViewModels
                     }
                     articles.Add(r3Article[r3]);
                 }
+
+                //一张用户作品
+                if (uCount <= u)
+                {
+                    break;
+                }
+                articles.Add(uArticle[u++]);
             }
 
             //超出比例的 用户作品
@@ -124,9 +124,6 @@ namespace YLP.UWP.ViewModels
                     articles.Add(r3Article[r3]);
                 }
 
-                //一张用户作品
-                articles.Add(uArticle[u]);
-
                 //四张单图
                 index = r3;
                 for (; r3 < index + 4; r3++)
@@ -137,6 +134,9 @@ namespace YLP.UWP.ViewModels
                     }
                     articles.Add(r3Article[r3]);
                 }
+
+                //一张用户作品
+                articles.Add(uArticle[u]);
             }
 
             //超出比例的 R3区域文章

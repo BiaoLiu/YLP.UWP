@@ -40,10 +40,15 @@ namespace YLP.UWP
 
         protected   override void OnNavigatedTo(NavigationEventArgs e)
         {
-           //await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
-           // {
-           //     await new MessageDialog("").ShowAsync();
-           // });
+
+          
+
+            //await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+            // {
+            //     await new MessageDialog("").ShowAsync();
+            // });
+
+
         }
     }
 
