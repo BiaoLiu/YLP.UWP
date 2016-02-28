@@ -10,6 +10,7 @@
 
     <Page.Resources>
         <local:NullableBooleanToBoolean x:Key="NullableBooleanToBoolean"/>
+        <local:MainDataTemplateSelector x:Key="MainDataTemplateSelector"/>
 
         <ControlTemplate x:Key="SplitViewTogglePaneButtonTemplate" TargetType="ToggleButton">
             <Grid x:Name="RootGrid"
@@ -161,10 +162,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
-
-        <local:MainDataTemplateSelector x:Key="MainDataTemplateSelector"/>
-
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -229,12 +226,16 @@
             <SplitView.Content>
                 <Grid >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="500"/>
+                        <ColumnDefinition  x:Name="ColumnDefinition" Width="500"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Pivot>
                         <PivotItem Header="推荐" Margin="0">
-                            <ListView ItemsSource="{x:Bind ViewModel.Articles}">
+                            <ListView x:Name="ListView" 
+                                      ItemsSource="{x:Bind ViewModel.Articles}"
+                                      ItemClick="ListView_OnItemClick"
+                                      IsItemClickEnabled="True"
+                                      SelectionMode="None">
                                 <ListView.Header>
                                     <Grid Height="200" Margin="0,0,0,10">
                                         <FlipView x:Name="flipView" ItemsSource="{x:Bind ViewModel.SlideArticles}">
@@ -273,7 +274,7 @@
                                         </ListBox>
                                     </Grid>
                                 </ListView.Header>
-                                <ListView.ItemTemplateSelector>
+                                <!--<ListView.ItemTemplateSelector>
                                     <local:MainDataTemplateSelector>
                                         <local:MainDataTemplateSelector.R2ArtilceTemplate>
                                             <DataTemplate x:DataType="data:MainModelBase">
@@ -314,14 +315,35 @@
                                             </DataTemplate>
                                         </local:MainDataTemplateSelector.UArticleTemplate>
                                     </local:MainDataTemplateSelector>
-                                </ListView.ItemTemplateSelector>
+                                </ListView.ItemTemplateSelector>-->
 
+                                <ListView.ItemTemplate>
+                                    <DataTemplate x:DataType="data:MainModelBase">
+                                        <StackPanel Margin="0,10,0,10">
+                                            <TextBlock Text="{x:Bind title}" TextWrapping="Wrap"/>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="1*"/>
+                                                    <ColumnDefinition Width="1*"/>
+                                                    <ColumnDefinition Width="1*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image  Source="{x:Bind pics[0].url}" Height="100" />
+                                                <Image Grid.Column="1" Source="{x:Bind pics[0].url}" Height="100"/>
+                                                <Image Grid.Column="2" Source="{x:Bind pics[0].url}"  Height="100"/>
+                                            </Grid>
+                                            <TextBlock Text="阅读"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                                
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
                                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="Margin" Value="0"/>
+                                        <Setter Property="Padding" Value="0"/>
                                     </Style>
                                 </ListView.ItemContainerStyle>
+                                
+                                
                             </ListView>
                         </PivotItem>
 
@@ -330,7 +352,11 @@
                         </PivotItem>
                     </Pivot>
 
-                    <Frame BorderBrush="AliceBlue" BorderThickness="1,0,0,0" x:Name="FramePage" Grid.Column="1"/>
+                    <Frame 
+                        x:Name="FramePage"
+                        BorderBrush="AliceBlue"
+                        BorderThickness="1,0,0,0" 
+                        Grid.Column="1"/>
                 </Grid>
             </SplitView.Content>
         </SplitView>
@@ -339,7 +365,7 @@
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="701"/>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="BottomBar.Visibility" Value="Collapsed"/>

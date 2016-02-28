@@ -75,5 +75,10 @@ namespace YLP.UWP
             var uarticle = selectedItem.Content as UArticle;
             Frame.Navigate(typeof(CommentPage), new { uarticle?.articleid, type = UserAction.task.ToString() });
         }
+
+        private void ListViewBase_OnItemClick(object sender, ItemClickEventArgs e)
+        {
+           var uarticle= e.ClickedItem as UArticle;
+        }
     }
 }

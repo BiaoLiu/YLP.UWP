@@ -117,6 +117,8 @@
                     <ListView  Grid.Row="1" 
                                ItemsSource="{x:Bind ViewModel.HotUArticles}" 
                                 ItemTemplate="{StaticResource UArticleTemplate}"
+                                IsItemClickEnabled="True"
+                               ItemClick="ListViewBase_OnItemClick"
                                SelectionMode="None">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">

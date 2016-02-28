@@ -50,6 +50,21 @@ namespace YLP.UWP
 
 
         }
+
+        private void ListView_OnItemClick(object sender, ItemClickEventArgs e)
+        {
+            var mainModel = e.ClickedItem as MainModelBase;
+            if (mainModel == null)
+            {
+                return;
+            }
+
+            if (mainModel.region == RegionType.R2.ToString() ||
+                mainModel.region == RegionType.R3.ToString())
+            {
+                this.FramePage.Navigate(typeof (Test2Page));
+            }
+        }
     }
 
     public class MainDataTemplateSelector : DataTemplateSelector
