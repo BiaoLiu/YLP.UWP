@@ -162,6 +162,11 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Foreground" Value="Orange"/>
+        </Style>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -229,29 +234,30 @@
                         <ColumnDefinition  x:Name="ColumnDefinition" Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Pivot>
-                        <PivotItem Header="推荐" Margin="0">
-                            <ListView x:Name="ListView" 
+                    <Frame x:Name="MasterFrame">
+                        <Pivot>
+                            <PivotItem Header="推荐" Margin="0">
+                                <ListView x:Name="ListView" 
                                       ItemsSource="{x:Bind ViewModel.Articles}"
                                       ItemClick="ListView_OnItemClick"
                                       IsItemClickEnabled="True"
                                       SelectionMode="None">
-                                <ListView.Header>
-                                    <Grid Height="200" Margin="0,0,0,10">
-                                        <FlipView x:Name="flipView" ItemsSource="{x:Bind ViewModel.SlideArticles}">
-                                            <FlipView.ItemTemplate>
-                                                <DataTemplate x:DataType="data:SlideArticle">
-                                                    <Grid>
-                                                        <Image  Source="{x:Bind pics.url}"  Stretch="UniformToFill"/>
-                                                        <Border   HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20">
-                                                            <TextBlock Text="{x:Bind title}"  FontSize="18" Foreground="#CCFFFFFF"  TextWrapping="Wrap"/>
-                                                        </Border>
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </FlipView.ItemTemplate>
-                                        </FlipView>
+                                    <ListView.Header>
+                                        <Grid Height="200" Margin="0,0,0,10">
+                                            <FlipView x:Name="flipView" ItemsSource="{x:Bind ViewModel.SlideArticles}">
+                                                <FlipView.ItemTemplate>
+                                                    <DataTemplate x:DataType="data:SlideArticle">
+                                                        <Grid>
+                                                            <Image  Source="{x:Bind pics.url}"  Stretch="UniformToFill"/>
+                                                            <Border   HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20">
+                                                                <TextBlock Text="{x:Bind title}"  FontSize="18" Foreground="#CCFFFFFF"  TextWrapping="Wrap"/>
+                                                            </Border>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </FlipView.ItemTemplate>
+                                            </FlipView>
 
-                                        <ListBox x:Name="listBox"
+                                            <ListBox x:Name="listBox"
                                                      Margin="0,0,0,3"
                                                     HorizontalAlignment="Center"
                                                      VerticalAlignment="Bottom"
@@ -259,88 +265,88 @@
                                                      ItemContainerStyle="{StaticResource DotListBoxItemStyle}"
                                                      ItemsSource="{x:Bind ViewModel.SlideArticles}"
                                                      SelectedIndex="{Binding ElementName=flipView, Path=SelectedIndex, Mode=TwoWay}">
-                                            <ListBox.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" />
-                                                </ItemsPanelTemplate>
-                                            </ListBox.ItemsPanel>
-                                            <ListBox.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Ellipse Width="1"
+                                                <ListBox.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" />
+                                                    </ItemsPanelTemplate>
+                                                </ListBox.ItemsPanel>
+                                                <ListBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Ellipse Width="1"
                                                                  Height="1"
                                                                  Fill="White" />
-                                                </DataTemplate>
-                                            </ListBox.ItemTemplate>
-                                        </ListBox>
-                                    </Grid>
-                                </ListView.Header>
-                                <ListView.ItemTemplateSelector>
-                                    <local:MainDataTemplateSelector>
-                                        <local:MainDataTemplateSelector.R2ArtilceTemplate>
-                                            <DataTemplate x:DataType="data:MainModelBase">
-                                                <StackPanel Margin="0,10,0,10">
-                                                    <TextBlock Text="{x:Bind title}" 
+                                                    </DataTemplate>
+                                                </ListBox.ItemTemplate>
+                                            </ListBox>
+                                        </Grid>
+                                    </ListView.Header>
+                                    <ListView.ItemTemplateSelector>
+                                        <local:MainDataTemplateSelector>
+                                            <local:MainDataTemplateSelector.R2ArtilceTemplate>
+                                                <DataTemplate x:DataType="data:MainModelBase">
+                                                    <StackPanel Margin="0,10,0,10">
+                                                        <TextBlock Text="{x:Bind title}" 
                                                                TextWrapping="Wrap" 
                                                                MaxLines="2"
                                                                Margin="0,0,0,5" />
-                                                    <Grid>
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="1*"/>
-                                                            <ColumnDefinition Width="1*"/>
-                                                            <ColumnDefinition Width="1*"/>
-                                                        </Grid.ColumnDefinitions>
-                                                        <Image  Source="{x:Bind pics[0].url}" Height="100" />
-                                                        <Image Grid.Column="1" Source="{x:Bind pics[0].url}" Height="100"/>
-                                                        <Image Grid.Column="2" Source="{x:Bind pics[0].url}"  Height="100"/>
-                                                    </Grid>
-                                                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                                        <TextBlock Text="阅读" FontSize="10"/>
-                                                        <TextBlock Text="{x:Bind hits}" Margin="5,0,20,0" FontSize="10"/>
-                                                        <TextBlock Text="弹幕" FontSize="10"/>
-                                                        <TextBlock Text="{x:Bind comments}" Margin="5,0,0,0" FontSize="10"/>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="1*"/>
+                                                                <ColumnDefinition Width="1*"/>
+                                                                <ColumnDefinition Width="1*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Image  Source="{x:Bind pics[0].url}" Height="100"  Stretch="UniformToFill"/>
+                                                            <Image Grid.Column="1" Source="{x:Bind pics[0].url}" Margin="10,0,0,0" Height="100" Stretch="UniformToFill"/>
+                                                            <Image Grid.Column="2" Source="{x:Bind pics[0].url}" Margin="10,0,0,0" Height="100" Stretch="UniformToFill"/>
+                                                        </Grid>
+                                                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                                            <TextBlock Text="阅读" Style="{StaticResource TextBlockStyle}"/>
+                                                            <TextBlock Text="{x:Bind hits}" Margin="5,0,20,0" Style="{StaticResource TextBlockStyle}"/>
+                                                            <TextBlock Text="弹幕" Style="{StaticResource TextBlockStyle}"/>
+                                                            <TextBlock Text="{x:Bind comments}" Margin="5,0,0,0" Style="{StaticResource TextBlockStyle}"/>
+                                                        </StackPanel>
                                                     </StackPanel>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </local:MainDataTemplateSelector.R2ArtilceTemplate>
+                                                </DataTemplate>
+                                            </local:MainDataTemplateSelector.R2ArtilceTemplate>
 
-                                        <local:MainDataTemplateSelector.R3ArticleTemplate>
-                                             <DataTemplate x:DataType="data:MainModelBase">
-                                        <Grid  Margin="0,0,0,10">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Image  Source="{x:Bind pics[0].url}"  Width="150" Height="100"/>
-                                            <StackPanel Grid.Column="1">
-                                                <TextBlock Text="{x:Bind subjectname}" FontSize="10"/>
-                                                <TextBlock Text="{x:Bind title}" 
+                                            <local:MainDataTemplateSelector.R3ArticleTemplate>
+                                                <DataTemplate x:DataType="data:MainModelBase">
+                                                    <Grid  Margin="0,0,0,10">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Image  Source="{x:Bind pics[0].url}"  Width="150" Height="100"/>
+                                                        <StackPanel Grid.Column="1">
+                                                            <TextBlock Text="{x:Bind subjectname}" FontSize="12"/>
+                                                            <TextBlock Text="{x:Bind title}" 
                                                            TextWrapping="Wrap"
                                                            MaxLines="2"
                                                            Margin="0,10,0,0" />
-                                                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                                            <TextBlock Text="阅读" FontSize="10"/>
-                                                            <TextBlock Text="{x:Bind hits}" Margin="5,0,20,0" FontSize="10"/>
-                                                            <TextBlock Text="弹幕" FontSize="10"/>
-                                                            <TextBlock Text="{x:Bind comments}" Margin="5,0,0,0" FontSize="10"/>
-                                                  </StackPanel>
-                                            </StackPanel>
-                                        </Grid>
-                                    </DataTemplate>
-                                        </local:MainDataTemplateSelector.R3ArticleTemplate>
+                                                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                                                <TextBlock Text="阅读"  Style="{StaticResource TextBlockStyle}"/>
+                                                                <TextBlock Text="{x:Bind hits}" Margin="5,0,20,0" Style="{StaticResource TextBlockStyle}"/>
+                                                                <TextBlock Text="弹幕" Style="{StaticResource TextBlockStyle}"/>
+                                                                <TextBlock Text="{x:Bind comments}" Margin="5,0,0,0" Style="{StaticResource TextBlockStyle}"/>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </local:MainDataTemplateSelector.R3ArticleTemplate>
 
-                                        <local:MainDataTemplateSelector.UArticleTemplate>
-                                            <DataTemplate x:DataType="data:MainModelBase">
-                                                <StackPanel>
-                                                    <Image Source="{x:Bind pics[0].url}"/>
-                                                    <TextBlock Text="{x:Bind username}"/>
-                                                    <TextBlock Text="{x:Bind title}" TextWrapping="Wrap"/>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </local:MainDataTemplateSelector.UArticleTemplate>
-                                    </local:MainDataTemplateSelector>
-                                </ListView.ItemTemplateSelector>
+                                            <local:MainDataTemplateSelector.UArticleTemplate>
+                                                <DataTemplate x:DataType="data:MainModelBase">
+                                                    <StackPanel>
+                                                        <Image Source="{x:Bind pics[0].url}"/>
+                                                        <TextBlock Text="{x:Bind username}" Margin="0,5,0,5" FontSize="10" />
+                                                        <TextBlock Text="{x:Bind title}" TextWrapping="Wrap"/>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </local:MainDataTemplateSelector.UArticleTemplate>
+                                        </local:MainDataTemplateSelector>
+                                    </ListView.ItemTemplateSelector>
 
-                                <!--<ListView.ItemTemplate>
+                                    <!--<ListView.ItemTemplate>
                                     <DataTemplate x:DataType="data:MainModelBase">
                                         <Grid  Margin="0,0,0,10">
                                             <Grid.ColumnDefinitions>
@@ -358,25 +364,26 @@
                                         </Grid>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>-->
-                                
-                                <ListView.ItemContainerStyle>
-                                    <Style TargetType="ListViewItem">
-                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="Padding" Value="0"/>
-                                    </Style>
-                                </ListView.ItemContainerStyle>
-                                
-                                
-                            </ListView>
-                        </PivotItem>
 
-                        <PivotItem Header="专题">
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="ListViewItem">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            <Setter Property="Padding" Value="0"/>
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
 
-                        </PivotItem>
-                    </Pivot>
+
+                                </ListView>
+                            </PivotItem>
+
+                            <PivotItem Header="专题">
+
+                            </PivotItem>
+                        </Pivot>
+                    </Frame>
 
                     <Frame 
-                        x:Name="FramePage"
+                        x:Name="DetailFrame"
                         BorderBrush="AliceBlue"
                         BorderThickness="1,0,0,0" 
                         Grid.Column="1"/>
@@ -385,8 +392,8 @@
         </SplitView>
 
         <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState>
+            <VisualStateGroup x:Name="AdaptiveStates" CurrentStateChanged="AdaptiveStates_CurrentStateChanged">
+                <VisualState x:Name="DefaultState">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="720"/>
                     </VisualState.StateTriggers>
@@ -396,7 +403,7 @@
                         <Setter Target="SplitView.DisplayMode" Value="CompactInline"/>
                     </VisualState.Setters>
                 </VisualState>
-                <VisualState>
+                <VisualState x:Name="TempState">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="498"/>
                     </VisualState.StateTriggers>
@@ -404,7 +411,7 @@
                         <Setter Target="ColumnDefinition.Width" Value="500"/>
                     </VisualState.Setters>
                 </VisualState>
-                <VisualState>
+                <VisualState  x:Name="NarrowState">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="0"/>
                     </VisualState.StateTriggers>

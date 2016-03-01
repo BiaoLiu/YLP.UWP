@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using YLP.UWP.Core;
 using YLP.UWP.Core.Common;
@@ -38,10 +39,10 @@ namespace YLP.UWP
             this.InitializeComponent();
         }
 
-        protected   override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
 
-          
+
 
             //await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             // {
@@ -62,8 +63,35 @@ namespace YLP.UWP
             if (mainModel.region == RegionType.R2.ToString() ||
                 mainModel.region == RegionType.R3.ToString())
             {
-                this.FramePage.Navigate(typeof (Test2Page));
+                this.DetailFrame.Navigate(typeof(Test2Page));
             }
+        }
+
+        private void AdaptiveStates_CurrentStateChanged(object sender, VisualStateChangedEventArgs e)
+        {
+
+            UpdateForVisualState(e.NewState, e.OldState);
+        }
+
+        private void UpdateForVisualState(VisualState newState, VisualState oldState = null)
+        {
+            var isNarrow = newState == NarrowState || newState == TempState;
+
+            if (isNarrow && (oldState == DefaultState))
+            {
+                // Resize down to the detail item. Don't play a transition.
+                if (DetailFrame.Content != null)
+                {
+                    MasterFrame.Navigate(typeof(Test2Page), null, new SuppressNavigationTransitionInfo());
+                }
+            }
+
+            if (DetailFrame.Content != null)
+            {
+
+            }
+
+
         }
     }
 
