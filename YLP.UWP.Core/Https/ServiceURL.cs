@@ -86,6 +86,11 @@ namespace YLP.UWP.Core.Https
         #region 专题模块
 
         /// <summary>
+        /// 获取文章详情
+        /// </summary>
+        public const string Article_GetArticleInfo = Host + "api/article-getarticleinfo";
+
+        /// <summary>
         /// 获取专题列表
         /// </summary>
         public const string Subject_GetSubjectList = Host + "api/v2/subject-getsubjectlist";

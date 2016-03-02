@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace YLP.UWP.Core.Models
 {
-    public class ArticleV2 : Author
+    public class Article : Author
     {
         public string articleid { get; set; }
         public string categoryid { get; set; }
         public string subjectid { get; set; }
         public string subjectname { get; set; }
         public string title { get; set; }
-        public Picture[] pics { get; set; }
+        public Picture pics { get; set; }
         public int piccount { get; set; }
         public string content { get; set; }
         public string tags { get; set; }
@@ -25,5 +25,18 @@ namespace YLP.UWP.Core.Models
         public int favorites { get; set; }
         public string region { get; set; }
         public string wapurl { get; set; }
+
+        private mutilmedia _mutilmedia;
+        public mutilmedia mutilmedia
+        {
+            get
+            {
+                return _mutilmedia;
+            }
+            set
+            {
+                SetProperty(ref _mutilmedia, value);
+            }
+        }
     }
 }

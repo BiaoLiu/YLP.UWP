@@ -9,9 +9,13 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 using Windows.Storage.Streams;
 using Windows.Web.Http;
 using YLP.UWP.Core.Extensions;
+using YLP.UWP.Core.Models;
 using HttpClient = Windows.Web.Http.HttpClient;
 using HttpResponseMessage = Windows.Web.Http.HttpResponseMessage;
 
@@ -114,7 +118,7 @@ namespace YLP.UWP.Core.Https
 
                 return await response.Content.ReadAsBufferAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return null;
             }

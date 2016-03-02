@@ -1,0 +1,35 @@
+﻿<Page
+    x:Class="YLP.UWP.ArticleInfoPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:YLP.UWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:data="using:YLP.UWP.Core.Models">
+
+    <Page.Resources>
+        <local:ArticleInfoDataTemplate x:Key="ArticleInfoDataTemplate"/>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ListView ItemsSource="{x:Bind ViewModel.Items}">
+            <ListView.ItemTemplateSelector>
+                <local:ArticleInfoDataTemplate>
+                    <local:ArticleInfoDataTemplate.TextTemplate>
+                        <DataTemplate x:DataType="data:mutilmediaLabel">
+                            <TextBlock Text="{x:Bind text,Mode=OneWay}"/>
+                        </DataTemplate>
+                    </local:ArticleInfoDataTemplate.TextTemplate>
+
+                    <local:ArticleInfoDataTemplate.ImageTemplate>
+                        <DataTemplate x:DataType="data:mutilmediaLabel">
+                            <Image Source="{x:Bind url,Mode=OneWay}"/>
+                        </DataTemplate>
+                    </local:ArticleInfoDataTemplate.ImageTemplate>
+                </local:ArticleInfoDataTemplate>
+             
+            </ListView.ItemTemplateSelector>
+        </ListView>
+    </Grid>
+</Page>

@@ -93,7 +93,7 @@ namespace YLP.UWP.Core.Https
         }
 
         /// <summary>
-        ///     向服务器发送GET请求 返回HTML格式数据
+        /// 向服务器发送GET请求 返回HTML格式数据
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
@@ -106,44 +106,54 @@ namespace YLP.UWP.Core.Https
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public async Task<IBuffer> GetBytesResponse(string url)
+        {
+            return await BaseService.SendGetRequestAsBytesAsync(url);
+        }
+
+        /// <summary>
         /// 向服务器发送请求 获取图片
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public async Task<WriteableBitmap> GetImageResponse(string url)
-        {
-            try
-            {
-                var buffer = await BaseService.SendGetRequestAsBytesAsync(url);
-                if (buffer != null)
-                {
-                    var bitmapImage = new BitmapImage();
+        //public async Task<WriteableBitmap> GetImageResponse(string url)
+        //{
+        //    try
+        //    {
+        //        var buffer = await BaseService.SendGetRequestAsBytesAsync(url);
+        //        if (buffer != null)
+        //        {
+        //            var bitmapImage = new BitmapImage();
 
-                    using (var memoryStream = new InMemoryRandomAccessStream())
-                    {
-                        var streamWriter = memoryStream.AsStreamForWrite();
-                        await streamWriter.WriteAsync(buffer.ToArray(), 0, (int)buffer.Length);
+        //            using (var memoryStream = new InMemoryRandomAccessStream())
+        //            {
+        //                var streamWriter = memoryStream.AsStreamForWrite();
+        //                await streamWriter.WriteAsync(buffer.ToArray(), 0, (int)buffer.Length);
 
-                        await streamWriter.FlushAsync();
-                        memoryStream.Seek(0);
+        //                await streamWriter.FlushAsync();
+        //                memoryStream.Seek(0);
 
-                        await bitmapImage.SetSourceAsync(memoryStream);
-                        var writeableBitmap = new WriteableBitmap(bitmapImage.PixelWidth, bitmapImage.PixelHeight);
-                        memoryStream.Seek(0);
+        //                await bitmapImage.SetSourceAsync(memoryStream);
+        //                var writeableBitmap = new WriteableBitmap(bitmapImage.PixelWidth, bitmapImage.PixelHeight);
+        //                memoryStream.Seek(0);
 
-                        await writeableBitmap.SetSourceAsync(memoryStream);
+        //                await writeableBitmap.SetSourceAsync(memoryStream);
 
-                        return writeableBitmap;
-                    }
-                }
+        //                return writeableBitmap;
+        //            }
+        //        }
 
-                return null;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
+        //        return null;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return null;
+        //    }
+        //}
 
         /// <summary>
         /// 构建请求参数字典

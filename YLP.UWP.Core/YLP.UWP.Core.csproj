@@ -121,7 +121,9 @@
     <Compile Include="Https\HttpRequestClient.cs" />
     <Compile Include="Https\ServiceURL.cs" />
     <Compile Include="Common\IncrementalLoading.cs" />
+    <Compile Include="Models\Article.cs" />
     <Compile Include="Models\ArticleV2.cs" />
+    <Compile Include="Models\Mutilmedia.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\MainModelBase.cs" />
@@ -136,7 +138,7 @@
     <Compile Include="Services\CommonService.cs" />
     <Compile Include="Services\MainService.cs" />
     <Compile Include="Services\MemberService.cs" />
-    <Compile Include="Services\SubjectService.cs" />
+    <Compile Include="Services\ArticleService.cs" />
     <Compile Include="Services\UArticleService.cs" />
     <Compile Include="Utilities\ApiEnum.cs" />
     <Compile Include="Utilities\EncryptHelper.cs" />

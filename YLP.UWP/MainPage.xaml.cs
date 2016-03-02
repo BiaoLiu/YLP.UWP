@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Navigation;
 using YLP.UWP.Core;
 using YLP.UWP.Core.Common;
 using YLP.UWP.Core.Models;
+using YLP.UWP.Core.Services;
 using YLP.UWP.Test;
 using YLP.UWP.ViewModels;
 
@@ -41,14 +42,10 @@ namespace YLP.UWP
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-
-
-
             //await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             // {
             //     await new MessageDialog("").ShowAsync();
             // });
-
 
         }
 
@@ -63,7 +60,9 @@ namespace YLP.UWP
             if (mainModel.region == RegionType.R2.ToString() ||
                 mainModel.region == RegionType.R3.ToString())
             {
-                this.DetailFrame.Navigate(typeof(Test2Page));
+                var articleId = mainModel.articleid;
+
+                this.DetailFrame.Navigate(typeof(ArticleInfoPage), articleId);
             }
         }
 

@@ -40,7 +40,8 @@ namespace YLP.UWP.Core.Https
                         var response = await client.PostAsync(url, content); //post请求
                         response.EnsureSuccessStatusCode();
 
-                        return await response.Content.ReadAsStringAsync();
+                        var bytes = await response.Content.ReadAsByteArrayAsync();
+                        return Encoding.UTF8.GetString(bytes);
                     }
                     catch (Exception ex)
                     {
