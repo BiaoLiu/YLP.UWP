@@ -64,15 +64,20 @@ namespace YLP.UWP
         {
             var richText = new StringBuilder();
 
+            mutilmediaLabel label;
+            mutilmediaImage image;
+
             foreach (var item in ViewModel.Items)
             {
                 if (item.GetType() == typeof(mutilmediaLabel))
                 {
-                    richText.Append($"<Run Text = \"{((mutilmediaLabel)item).text}\" Foreground=\"Black\" />");
+                    label = (mutilmediaLabel)item;
+                    richText.Append($"<Run Text = \"{label.text}\" Foreground=\"Black\" FontSize=\"{label.size}\"/>");
                 }
-                if (item.GetType() == typeof(mutilmediaImage))
+                if (item.GetType() == typeof (mutilmediaImage))
                 {
-                    richText.Append($"<InlineUIContainer><Image Source = \"{((mutilmediaImage)item).url}\" /></InlineUIContainer> ");
+                    image = (mutilmediaImage) item;
+                    richText.Append( $"<InlineUIContainer><Image Source = \"{image.url}\"/></InlineUIContainer> ");
                 }
             }
 

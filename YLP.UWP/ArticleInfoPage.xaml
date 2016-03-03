@@ -14,13 +14,14 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <ScrollViewer>
-      
+            
             <RichTextBlock x:Name="RichTextBlock"  >
-             
-            </RichTextBlock>
+                <Paragraph>
+                    <Run ></Run>
 
-           
+
+                </Paragraph>
+            </RichTextBlock>
         </ScrollViewer>
- 
     </Grid>
 </Page>
