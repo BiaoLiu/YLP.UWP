@@ -10,29 +10,33 @@ using YLP.UWP.Core.Services;
 
 namespace YLP.UWP.ViewModels
 {
+    public delegate void CallbackDegate();
+
     public class ArticleViewModel : BindableBase
     {
-        private string _articleId;
+        public CallbackDegate Callback { get; set; }
+
+        private readonly string _articleId;
         public ArticleViewModel(string articleId)
         {
             _articleId = articleId;
 
-            Update();
+            Initiallize();
         }
 
-        public async void Update()
+        public async void Initiallize()
         {
             var api = new ArticleService();
 
+            Article = new Article();
+
             var result = await api.GetArticleInfo(_articleId);
 
-            Article= result.Data;
+            Article = result.Data;
 
-            Items = new ObservableCollection<mutilmediaLabel>();
-            foreach (var item in result.Data.mutilmedia.Items)
-            {
-                Items.Add(item as mutilmediaLabel);
-            }
+            Items = Article.mutilmedias.ToList();
+
+            Callback?.Invoke();
         }
 
         private Article _article;
@@ -43,6 +47,6 @@ namespace YLP.UWP.ViewModels
             set { SetProperty(ref _article, value); }
         }
 
-        public ObservableCollection<mutilmediaLabel> Items { get; set; } 
+        public List<object> Items { get; set; }
     }
 }

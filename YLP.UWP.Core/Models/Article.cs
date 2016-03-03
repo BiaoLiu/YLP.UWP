@@ -26,17 +26,6 @@ namespace YLP.UWP.Core.Models
         public string region { get; set; }
         public string wapurl { get; set; }
 
-        private mutilmedia _mutilmedia;
-        public mutilmedia mutilmedia
-        {
-            get
-            {
-                return _mutilmedia;
-            }
-            set
-            {
-                SetProperty(ref _mutilmedia, value);
-            }
-        }
+        public object[] mutilmedias { get; set; }
     }
 }

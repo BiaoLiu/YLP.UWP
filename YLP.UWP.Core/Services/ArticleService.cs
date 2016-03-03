@@ -43,7 +43,7 @@ namespace YLP.UWP.Core.Services
                     using (var memoryStream = new MemoryStream(buffer.ToArray()))
                     {
                         XmlSerializer serializer = new XmlSerializer(typeof(mutilmedia));
-                        article.mutilmedia = (mutilmedia)serializer.Deserialize(memoryStream);
+                        article.mutilmedias = ((mutilmedia)serializer.Deserialize(memoryStream)).Items;
                     }
 
                     result.Data = article;

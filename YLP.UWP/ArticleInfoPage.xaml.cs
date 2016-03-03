@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
+using System.Text.RegularExpressions;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Markup;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using YLP.UWP.Core.Models;
@@ -29,13 +36,60 @@ namespace YLP.UWP
 
         public ArticleInfoPage()
         {
-            ViewModel = new ArticleViewModel("f3e1738c-805c-43e4-b5ee-a59500eb36e2");
-
             this.InitializeComponent();
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        private async void CallbackProcess()
         {
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                this.RichTextBlock.Blocks.Add(GetRichText());
+            });
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            var articleId = e.Parameter?.ToString();
+
+            if (articleId == null)
+            {
+                return;
+            }
+
+            ViewModel = new ArticleViewModel(articleId);
+            ViewModel.Callback = CallbackProcess;
+        }
+
+        private Paragraph GetRichText()
+        {
+            var richText = new StringBuilder();
+
+            foreach (var item in ViewModel.Items)
+            {
+                if (item.GetType() == typeof(mutilmediaLabel))
+                {
+                    richText.Append($"<Run Text = \"{((mutilmediaLabel)item).text}\" Foreground=\"Black\" />");
+                }
+                if (item.GetType() == typeof(mutilmediaImage))
+                {
+                    richText.Append($"<InlineUIContainer><Image Source = \"{((mutilmediaImage)item).url}\" /></InlineUIContainer> ");
+                }
+            }
+
+            //richText = richText.Replace("\r\n", "<LineBreak/>"); //将换行符转换成<LineBreak/>,用于实现换行。
+
+            //生成xaml
+            var xaml = string.Format(@"<Paragraph 
+                                        xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""
+                                        xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml"">
+                                    <Paragraph.Inlines>
+                                    <Run></Run>
+                                      {0}
+                                    </Paragraph.Inlines>
+                                </Paragraph>", richText.ToString());
+            var p = (Paragraph)XamlReader.Load(xaml);
+            p.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
+            return p;
         }
     }
 
@@ -47,9 +101,8 @@ namespace YLP.UWP
 
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
-            var text = item as mutilmediaLabel;
 
-            if (string.IsNullOrEmpty(text.url))
+            if (item.GetType() == typeof(mutilmediaLabel))
             {
                 return TextTemplate;
             }

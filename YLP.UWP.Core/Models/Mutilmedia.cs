@@ -15,7 +15,7 @@ namespace YLP.UWP.Core.Models
         private object[] itemsField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("image", typeof(mutilmediaLabel))]
+        [System.Xml.Serialization.XmlElementAttribute("image", typeof(mutilmediaImage))]
         [System.Xml.Serialization.XmlElementAttribute("label", typeof(mutilmediaLabel))]
         public object[] Items
         {
@@ -34,7 +34,6 @@ namespace YLP.UWP.Core.Models
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
     public class mutilmediaLabel : BindableBase
     {
-
         private string textField;
 
         private bool boldField;
@@ -49,72 +48,47 @@ namespace YLP.UWP.Core.Models
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string text
         {
-            get
-            {
-                return this.textField;
-            }
-            set
-            {
-                SetProperty(ref textField, value);
-            }
+            get { return this.textField; }
+            set { SetProperty(ref textField, value); }
         }
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool bold
         {
-            get
-            {
-                return this.boldField;
-            }
-            set
-            {
-                this.boldField = value;
-            }
+            get { return this.boldField; }
+            set { this.boldField = value; }
         }
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public int size
         {
-            get
-            {
-                return this.sizeField;
-            }
-            set
-            {
-                this.sizeField = value;
-            }
+            get { return this.sizeField; }
+            set { this.sizeField = value; }
         }
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string color
         {
-            get
-            {
-                return this.colorField;
-            }
-            set
-            {
-                this.colorField = value;
-            }
+            get { return this.colorField; }
+            set { this.colorField = value; }
         }
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string aligment
         {
-            get
-            {
-                return this.aligmentField;
-            }
-            set
-            {
-                this.aligmentField = value;
-            }
+            get { return this.aligmentField; }
+            set { this.aligmentField = value; }
         }
+    }
 
+
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    public class mutilmediaImage
+    {
         private string urlField;
 
         private string onclickField;
@@ -135,7 +109,7 @@ namespace YLP.UWP.Core.Models
             }
             set
             {
-                SetProperty(ref urlField, value);
+                this.urlField = value;
             }
         }
 

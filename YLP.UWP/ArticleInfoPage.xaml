@@ -13,23 +13,14 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ListView ItemsSource="{x:Bind ViewModel.Items}">
-            <ListView.ItemTemplateSelector>
-                <local:ArticleInfoDataTemplate>
-                    <local:ArticleInfoDataTemplate.TextTemplate>
-                        <DataTemplate x:DataType="data:mutilmediaLabel">
-                            <TextBlock Text="{x:Bind text,Mode=OneWay}"/>
-                        </DataTemplate>
-                    </local:ArticleInfoDataTemplate.TextTemplate>
-
-                    <local:ArticleInfoDataTemplate.ImageTemplate>
-                        <DataTemplate x:DataType="data:mutilmediaLabel">
-                            <Image Source="{x:Bind url,Mode=OneWay}"/>
-                        </DataTemplate>
-                    </local:ArticleInfoDataTemplate.ImageTemplate>
-                </local:ArticleInfoDataTemplate>
+        <ScrollViewer>
+      
+            <RichTextBlock x:Name="RichTextBlock"  >
              
-            </ListView.ItemTemplateSelector>
-        </ListView>
+            </RichTextBlock>
+
+           
+        </ScrollViewer>
+ 
     </Grid>
 </Page>
