@@ -82,6 +82,8 @@ namespace YLP.UWP.Core.Https
             }
             catch (Exception ex)
             {
+                PopupMessage.DisplayMessage(ex.Message);
+
                 return null;
             }
         }

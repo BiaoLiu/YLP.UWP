@@ -91,6 +91,13 @@ namespace YLP.UWP
                 if (DetailFrame.Content != null)
                 {
                     //MasterFrame.Navigate(DetailFrame.SourcePageType);
+
+                    MasterFrame.Visibility = Visibility.Collapsed;
+
+                    Grid.SetColumn(DetailFrame,0);
+
+                 //   DetailFrame.SetValue(Grid,"colo");
+
                 }
             }
 

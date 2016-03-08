@@ -396,7 +396,7 @@
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel>
-                                                <Image Source="{Binding pics.url}" Height="300" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill"/>
+                                                <Image Source="{Binding pics.url}" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill"/>
                                                 <ListView ItemsSource="{Binding recommendarticles}" ItemContainerStyle="{StaticResource ListViewItemStyle}">
                                                     <ListView.ItemTemplate>
                                                         <DataTemplate>
@@ -405,8 +405,11 @@
                                                                     <ColumnDefinition Width="Auto"/>
                                                                     <ColumnDefinition Width="*"/>
                                                                 </Grid.ColumnDefinitions>
-                                                                <Border CornerRadius="5,5,5,5" BorderThickness="2" BorderBrush="AliceBlue">
-                                                                    <Image Source="{Binding pics.url}" Width="132" Height="96"/>
+                                                                <Border CornerRadius="5,5,5,5" BorderThickness="2" 
+                                                                        BorderBrush="AliceBlue"
+                                                                        Width="80" 
+                                                                        Height="50">
+                                                                    <Image Source="{Binding pics.url}" />
                                                                 </Border>
                                                                 <Border  Grid.Column="1" BorderThickness="0,0,0,2" BorderBrush="AliceBlue" Background="#F5F5F5">
                                                                     <TextBlock
@@ -414,8 +417,7 @@
                                                                     VerticalAlignment="Center" 
                                                                     Text="{Binding title}"
                                                                     TextWrapping="Wrap" 
-                                                                    MaxLines="2"
-                                                                    FontSize="17"/>
+                                                                    MaxLines="2"/>
                                                                 </Border>
                                                             </Grid>
                                                         </DataTemplate>
