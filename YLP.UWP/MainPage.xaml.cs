@@ -47,6 +47,8 @@ namespace YLP.UWP
             //     await new MessageDialog("").ShowAsync();
             // });
 
+            PopupMessage.DisplayMessage("请求失败");
+
         }
 
         private void ListView_OnItemClick(object sender, ItemClickEventArgs e)
@@ -62,13 +64,20 @@ namespace YLP.UWP
             {
                 var articleId = mainModel.articleid;
 
-                this.DetailFrame.Navigate(typeof(ArticleInfoPage), articleId);
+                //窄屏
+                if (AdaptiveStates.CurrentState == NarrowState || AdaptiveStates.CurrentState == TempState)
+                {
+                    this.MasterFrame.Navigate(typeof(ArticleInfoPage), articleId);
+                }
+                else
+                {
+                    this.DetailFrame.Navigate(typeof(ArticleInfoPage), articleId);
+                }
             }
         }
 
         private void AdaptiveStates_CurrentStateChanged(object sender, VisualStateChangedEventArgs e)
         {
-
             UpdateForVisualState(e.NewState, e.OldState);
         }
 
@@ -76,21 +85,20 @@ namespace YLP.UWP
         {
             var isNarrow = newState == NarrowState || newState == TempState;
 
-            if (isNarrow && (oldState == DefaultState))
+            //宽屏收缩至窄屏
+            if (isNarrow && oldState == DefaultState)
             {
-                // Resize down to the detail item. Don't play a transition.
                 if (DetailFrame.Content != null)
                 {
-                    MasterFrame.Navigate(typeof(Test2Page), null, new SuppressNavigationTransitionInfo());
+                    //MasterFrame.Navigate(DetailFrame.SourcePageType);
                 }
             }
 
-            if (DetailFrame.Content != null)
-            {
 
-            }
-
-
+            //if (MasterFrame.CurrentSourcePageType != typeof(MainPage))
+            //{
+            //    this.DetailFrame.Navigate(MasterFrame.CurrentSourcePageType);
+            //}
         }
     }
 

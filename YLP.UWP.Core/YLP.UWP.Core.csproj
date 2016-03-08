@@ -129,6 +129,7 @@
     <Compile Include="Models\MainModelBase.cs" />
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\SlideArticle.cs" />
+    <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\UArticle.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="OperateCodeEnum.cs" />
@@ -144,6 +145,8 @@
     <Compile Include="Utilities\EncryptHelper.cs" />
     <Compile Include="Utilities\EnumHelper.cs" />
     <Compile Include="Utilities\FileHelper.cs" />
+    <Compile Include="Utilities\PopupMessage.cs" />
+    <Compile Include="Utilities\StringUtil.cs" />
     <EmbeddedResource Include="Properties\YLP.UWP.Core.rd.xml" />
   </ItemGroup>
   <ItemGroup>

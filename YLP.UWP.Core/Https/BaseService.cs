@@ -80,7 +80,7 @@ namespace YLP.UWP.Core.Https
                 var buffer = await response.Content.ReadAsBufferAsync();
                  return Encoding.UTF8.GetString(buffer.ToArray());
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return null;
             }

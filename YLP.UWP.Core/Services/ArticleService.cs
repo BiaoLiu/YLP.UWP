@@ -31,31 +31,25 @@ namespace YLP.UWP.Core.Services
 
             var response = await GetResponse(ServiceURL.Article_GetArticleInfo);
             result.Retcode = response?.GetNamedString("retcode");
-            try
-            {
 
-                if (response != null && result.Retcode?.CheckSuccess() == true)
+            if (response != null && result.Retcode?.CheckSuccess() == true)
+            {
+                var data = response.GetNamedValue("data");
+                var article = JsonConvert.DeserializeObject<Article>(data.ToString());
+
+                var buffer = await GetBytesResponse(article.content);
+                using (var memoryStream = new MemoryStream(buffer.ToArray()))
                 {
-                    var data = response.GetNamedValue("data");
-                    var article = JsonConvert.DeserializeObject<Article>(data.ToString());
-
-                    var buffer = await GetBytesResponse(article.content);
-                    using (var memoryStream = new MemoryStream(buffer.ToArray()))
-                    {
-                        XmlSerializer serializer = new XmlSerializer(typeof(mutilmedia));
-                        article.mutilmedias = ((mutilmedia)serializer.Deserialize(memoryStream)).Items;
-                    }
-
-                    result.Data = article;
+                    XmlSerializer serializer = new XmlSerializer(typeof(mutilmedia));
+                    article.mutilmedias = ((mutilmedia)serializer.Deserialize(memoryStream)).Items;
                 }
-            }
-            catch (Exception ex)
-            {
 
-                throw;
+                result.Data = article;
             }
 
             return result;
         }
+
+     
     }
 }

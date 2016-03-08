@@ -116,5 +116,40 @@ namespace YLP.UWP.Core.Services
 
             return result;
         }
+
+        /// <summary>
+        /// 获取专题列表
+        /// </summary>
+        /// <param name="subjectId"></param>
+        /// <param name="type"></param>
+        /// <param name="categoryId"></param>
+        /// <param name="sort"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public async Task<OperationResult<List<Subject>>> GetSubjectList(string subjectId, string type, string categoryId, string sort, int pageIndex, int pageSize)
+        {
+            FormData.Clear();
+
+            FormData["subjectid"] = subjectId ?? "";
+            FormData["type"] = type ?? "";
+            FormData["categoryid"] = categoryId ?? "";
+            FormData["sort"] = sort;
+            FormData["pindex"] = pageIndex.ToString();
+            FormData["psize"] = pageSize.ToString();
+
+            var result = new OperationResult<List<Subject>>();
+
+            var response = await GetResponse(ServiceURL.Subject_GetSubjectList);
+            result.Retcode = response?.GetNamedString("retcode");
+
+            if (response != null && result.Retcode?.CheckSuccess() == true)
+            {
+                var data = response.GetNamedValue("data");
+                result.Data = JsonConvert.DeserializeObject<List<Subject>>(data.ToString());
+            }
+
+            return result;
+        }
     }
 }

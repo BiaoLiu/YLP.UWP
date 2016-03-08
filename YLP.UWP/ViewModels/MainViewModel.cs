@@ -22,26 +22,13 @@ namespace YLP.UWP.ViewModels
         /// </summary>
         public ObservableCollection<SlideArticle> SlideArticles { get; set; }
 
-        /// <summary>
-        ///// R3区域文章(单图)
-        ///// </summary>
-        //public IncrementalLoading<ArticleV2> R3Aritcles { get; set; }
-
-        ///// <summary>
-        ///// R2区域文章(多图)
-        ///// </summary>
-        //public IncrementalLoading<ArticleV2> R2Articles { get; set; }
-
         public IncrementalLoading<MainModelBase> Articles { get; set; }
+
+        public IncrementalLoading<Subject> Subjects { get; set; }
 
         public MainViewModel()
         {
             SlideArticles = new ObservableCollection<SlideArticle>();
-
-            ////页容量35
-            //R3Aritcles = new IncrementalLoading<ArticleV2>(35, (pageIndex, pageSize) => _api.GetR3ArticleList(pageIndex, pageSize));
-            ////页容量5
-            //R2Articles = new IncrementalLoading<ArticleV2>(5, (pageIndex, pageSize) => _api.GetR2ArticleList(pageIndex, pageSize));
 
             Articles = new IncrementalLoading<MainModelBase>(new int[] { 35, 5, 5 }, (p, s) => _api.GetR3ArticleList(p, s),
                 (p, s) => _api.GetR2ArticleList(p, s),
@@ -49,10 +36,12 @@ namespace YLP.UWP.ViewModels
             //结果处理
             Articles.ResultProcessDelegate = ResultProcess;
 
-            Update();
+            Subjects = new IncrementalLoading<Subject>((p, s) => _api.GetSubjectList(null, null, null, SortType.latest.ToString(), p, s));
+
+            Initialize();
         }
 
-        public async void Update()
+        public async void Initialize()
         {
             //获取轮播区域文章列表
             var result = await _api.GetSlideArticles();
@@ -103,11 +92,10 @@ namespace YLP.UWP.ViewModels
                 }
 
                 //一张用户作品
-                if (uCount <= u)
+                if (u < uCount)
                 {
-                    break;
+                    articles.Add(uArticle[u++]);
                 }
-                articles.Add(uArticle[u++]);
             }
 
             //超出比例的 用户作品
