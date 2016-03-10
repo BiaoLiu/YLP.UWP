@@ -11,10 +11,10 @@ namespace YLP.UWP.Core.Https
     /// </summary>
     public class ServiceURL
     {
-        //private const string Host = "http://testapi.yuleband.com/";
+        private const string Host = "http://testapi.yuleband.com/";
         //private const string Host = "http://localhost:24369/";
 
-        private const string Host = "http://api.yuleband.com/";
+        //private const string Host = "http://api.yuleband.com/";
 
         #region 首页模块
 

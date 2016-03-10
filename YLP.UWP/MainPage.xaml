@@ -6,173 +6,18 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    NavigationCacheMode="Enabled"
     xmlns:data="using:YLP.UWP.Core.Models"
     DataContext="{Binding ViewModel,RelativeSource={RelativeSource Self}}">
 
     <Page.Resources>
         <local:NullableBooleanToBoolean x:Key="NullableBooleanToBoolean"/>
         <local:MainDataTemplateSelector x:Key="MainDataTemplateSelector"/>
+        <local:SubjectTypeColorConverter x:Key="SubjectTypeColor"/>
 
-        <ControlTemplate x:Key="SplitViewTogglePaneButtonTemplate" TargetType="ToggleButton">
-            <Grid x:Name="RootGrid"
-                  Background="{TemplateBinding Background}">
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroup x:Name="CommonStates">
-                        <VisualState x:Name="Normal" />
-                        <VisualState x:Name="PointerOver">
-                            <VisualState.Setters>
-                                <Setter Target="RootGrid.Background" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}" />
-                                <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SystemControlHighlightBaseMediumHighBrush}" />
-                            </VisualState.Setters>
-                        </VisualState>
-                        <VisualState x:Name="Pressed">
-                            <VisualState.Setters>
-                                <Setter Target="RootGrid.Background" Value="{ThemeResource SystemControlBackgroundBaseMediumLowBrush}" />
-                                <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SystemControlHighlightBaseMediumBrush}" />
-                            </VisualState.Setters>
-                        </VisualState>
-                        <VisualState x:Name="Disabled">
-                            <VisualState.Setters>
-                                <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SystemControlForegroundBaseLowBrush}" />
-                            </VisualState.Setters>
-                        </VisualState>
-                        <VisualState x:Name="Checked"  />
-                        <VisualState x:Name="CheckedPointerOver">
-                            <VisualState.Setters>
-                                <Setter Target="RootGrid.Background" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}" />
-                                <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SystemControlHighlightBaseMediumHighBrush}" />
-                            </VisualState.Setters>
-                        </VisualState>
-                        <VisualState x:Name="CheckedPressed">
-                            <VisualState.Setters>
-                                <Setter Target="RootGrid.Background" Value="{ThemeResource SystemControlBackgroundBaseMediumLowBrush}" />
-                                <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SystemControlHighlightBaseMediumBrush}" />
-                            </VisualState.Setters>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
-
-                <ContentPresenter x:Name="ContentPresenter"
-                                  Padding="{TemplateBinding Padding}"
-                                  BorderBrush="{TemplateBinding BorderBrush}"
-                                  BorderThickness="{TemplateBinding BorderThickness}"
-                                  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                  AutomationProperties.AccessibilityView="Raw"
-                                  ContentTemplate="{TemplateBinding ContentTemplate}"
-                                  ContentTransitions="{TemplateBinding ContentTransitions}" />
-            </Grid>
-        </ControlTemplate>
-
-        <Style x:Key="SplitViewTogglePaneButtonStyle"
-               TargetType="ToggleButton">
-            <Setter Property="Background"
-                    Value="Transparent" />
-            <Setter Property="Foreground"
-                    Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
-            <Setter Property="BorderBrush"
-                    Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
-            <Setter Property="BorderThickness"
-                    Value="0" />
-            <Setter Property="Padding"
-                    Value="0" />
-            <Setter Property="HorizontalAlignment"
-                    Value="Left" />
-            <Setter Property="HorizontalContentAlignment"
-                    Value="Center" />
-            <Setter Property="VerticalAlignment"
-                    Value="Top" />
-            <Setter Property="VerticalContentAlignment"
-                    Value="Center" />
-            <Setter Property="UseSystemFocusVisuals"
-                    Value="True" />
-
-            <Setter Property="FontFamily"
-                    Value="{ThemeResource SymbolThemeFontFamily}" />
-            <Setter Property="Content"
-                    Value="&#xE700;" />
-            <Setter Property="Height"
-                    Value="48" />
-            <Setter Property="Width"
-                    Value="48" />
-
-            <Setter Property="FontWeight"
-                    Value="Normal" />
-            <Setter Property="FontSize"
-                    Value="20" />
-            <Setter Property="Template"
-                    Value="{StaticResource SplitViewTogglePaneButtonTemplate}" />
-        </Style>
-
-        <Style x:Key="DotListBoxItemStyle" TargetType="ListBoxItem">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="TabNavigation" Value="Local" />
-            <Setter Property="Padding" Value="12,11,12,13" />
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="UseSystemFocusVisuals" Value="True" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListBoxItem">
-                        <Grid x:Name="LayoutRoot"
-                              Background="{TemplateBinding Background}"
-                              BorderThickness="{TemplateBinding BorderThickness}">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal" />
-                                    <VisualState x:Name="Disabled" />
-                                    <VisualState x:Name="PointerOver" />
-                                    <VisualState x:Name="Pressed" />
-                                    <VisualState x:Name="Selected">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="dotEllipse" Storyboard.TargetProperty="Fill">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="OrangeRed" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="SelectedUnfocused">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="dotEllipse" Storyboard.TargetProperty="Fill">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="OrangeRed" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="SelectedPointerOver">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="dotEllipse" Storyboard.TargetProperty="Fill">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="OrangeRed" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="SelectedPressed">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="dotEllipse" Storyboard.TargetProperty="Fill">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="OrangeRed" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <Ellipse x:Name="dotEllipse"
-                                     Width="10"
-                                     Height="10"
-                                     Control.IsTemplateFocusTarget="True"
-                                     Fill="White" />
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        
         <Style x:Key="TextBlockStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="10"/>
             <Setter Property="Foreground" Value="#E96F34"/>
-        </Style>
-
-
-        <Style x:Key="ListViewItemStyle" TargetType="ListViewItem">
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="Padding" Value="0"/>
         </Style>
     </Page.Resources>
 
@@ -236,7 +81,7 @@
                 </Grid>
             </SplitView.Pane>
             <SplitView.Content>
-                <Grid >
+                <Grid x:Name="PageRootGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition  x:Name="ColumnDefinition" Width="Auto"/>
                         <ColumnDefinition Width="*"/>
@@ -247,13 +92,14 @@
                                 <ListView x:Name="ListView" 
                                       ItemsSource="{x:Bind ViewModel.Articles}"
                                       ItemClick="ListView_OnItemClick"
+                                      ItemContainerStyle="{StaticResource ListViewItemStyle}"
                                       IsItemClickEnabled="True"
                                       SelectionMode="None">
                                     <ListView.Header>
                                         <Grid Margin="0,0,0,10">
                                             <FlipView x:Name="flipView"
                                                       ItemsSource="{x:Bind ViewModel.SlideArticles}"
-                                                      Height="300">
+                                                      Height="300" >
                                                 <FlipView.ItemTemplate>
                                                     <DataTemplate x:DataType="data:SlideArticle">
                                                         <Grid>
@@ -297,7 +143,7 @@
                                         <local:MainDataTemplateSelector>
                                             <local:MainDataTemplateSelector.R2ArtilceTemplate>
                                                 <DataTemplate x:DataType="data:MainModelBase">
-                                                    <StackPanel Margin="0,5,0,15">
+                                                    <StackPanel Margin="10,5,10,15">
                                                         <TextBlock Text="{x:Bind title}" 
                                                                TextWrapping="Wrap" 
                                                                MaxLines="2"
@@ -336,10 +182,12 @@
                                                                 <RowDefinition/>
                                                                 <RowDefinition/>
                                                             </Grid.RowDefinitions>
-                                                                <TextBlock Text="{x:Bind subjectname}" FontSize="12" Margin="0,5,0,0"/>
-                                                            <TextBlock Grid.Row="1" Text="{x:Bind title}" VerticalAlignment="Center"
-                                                           TextWrapping="Wrap"
-                                                           MaxLines="2" />
+                                                            <TextBlock Text="{x:Bind subjectname}" FontSize="12" Margin="0,5,0,0"/>
+                                                            <TextBlock Grid.Row="1"
+                                                                       Text="{x:Bind title}" 
+                                                                       VerticalAlignment="Center"
+                                                                       TextWrapping="Wrap"
+                                                                       MaxLines="2" />
                                                             <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,0,0,5">
                                                                 <TextBlock Text="阅读"  Style="{StaticResource TextBlockStyle}"/>
                                                                 <TextBlock Text="{x:Bind hits}" Margin="5,0,20,0" Style="{StaticResource TextBlockStyle}"/>
@@ -353,7 +201,7 @@
 
                                             <local:MainDataTemplateSelector.UArticleTemplate>
                                                 <DataTemplate x:DataType="data:MainModelBase">
-                                                    <StackPanel Margin="0,5,0,10">
+                                                    <StackPanel Margin="10,5,10,10">
                                                         <Image Source="{x:Bind pics[0].url}"/>
                                                         <TextBlock Text="{x:Bind username}" Margin="0,5,0,5" FontSize="10" />
                                                         <TextBlock Text="{x:Bind title}" TextWrapping="Wrap"/>
@@ -381,50 +229,81 @@
                                         </Grid>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>-->
-
-                                    <ListView.ItemContainerStyle>
-                                        <Style TargetType="ListViewItem">
-                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                            <Setter Property="Padding" Value="0"/>
-                                        </Style>
-                                    </ListView.ItemContainerStyle>
                                 </ListView>
                             </PivotItem>
 
                             <PivotItem Header="专题">
-                                <ListView ItemsSource="{Binding Subjects}" ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                                <ListView 
+                                    ItemsSource="{Binding Subjects}"
+                                    ItemContainerStyle="{StaticResource ListViewItemStyle}">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
-                                            <StackPanel>
-                                                <Image Source="{Binding pics.url}" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill"/>
-                                                <ListView ItemsSource="{Binding recommendarticles}" ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                                            <Grid Margin="0,20,0,0">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <RelativePanel>
+                                                    <Image x:Name="SubjectCorver" 
+                                                        Source="{Binding pics.url}" 
+                                                       Height="220" 
+                                                       HorizontalAlignment="Center" 
+                                                       VerticalAlignment="Center"
+                                                       Stretch="UniformToFill"/>
+
+                                                    <Border Background="{Binding type,Converter={StaticResource SubjectTypeColor}}"   
+                                                            Width="48"
+                                                            Height="25"
+                                                            RelativePanel.AlignRightWith="SubjectCorver" 
+                                                            Margin="0,0,20,0">
+                                                        <TextBlock Text="{Binding type}" 
+                                                               Foreground="#FFFFFF"
+                                                               HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center"/>
+                                                        <!--Foreground="#EC3848"/>-->
+                                                    </Border>
+                                                    <TextBlock Text="{Binding title}" 
+                                                               RelativePanel.Above="Descript" 
+                                                               RelativePanel.AlignHorizontalCenterWith="SubjectCorver"
+                                                               Foreground="#FFFFFF"
+                                                               FontSize="20"
+                                                               Margin="0,0,0,10" />
+                                                    <TextBlock x:Name="Descript" 
+                                                               Text="{Binding descript}" 
+                                                               RelativePanel.AlignVerticalCenterWith="SubjectCorver" 
+                                                               RelativePanel.AlignHorizontalCenterWith="SubjectCorver"
+                                                               Foreground="#FFFFFF"
+                                                               FontSize="14"/>
+                                                </RelativePanel>
+                                               
+                                                <ListView Grid.Row="1"
+                                                    ItemsSource="{Binding recommendarticles}" 
+                                                          ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                                                          ItemClick="SubjectArticle_OnItemClick"
+                                                          IsItemClickEnabled="True">
                                                     <ListView.ItemTemplate>
                                                         <DataTemplate>
-                                                            <Grid Padding="0,10,0,10">
+                                                            <Grid Padding="0,15,10,15" 
+                                                                  BorderThickness="0,0,0,2" 
+                                                                  BorderBrush="Azure" 
+                                                                  Background="#F5F5F5">
                                                                 <Grid.ColumnDefinitions>
                                                                     <ColumnDefinition Width="Auto"/>
                                                                     <ColumnDefinition Width="*"/>
                                                                 </Grid.ColumnDefinitions>
-                                                                <Border CornerRadius="5,5,5,5" BorderThickness="2" 
-                                                                        BorderBrush="AliceBlue"
-                                                                        Width="80" 
-                                                                        Height="50">
-                                                                    <Image Source="{Binding pics.url}" />
-                                                                </Border>
-                                                                <Border  Grid.Column="1" BorderThickness="0,0,0,2" BorderBrush="AliceBlue" Background="#F5F5F5">
-                                                                    <TextBlock
-                                                                    Margin="10,0,10,0" 
+                                                                <Image Source="{Binding pics.url}"  Width="80" Height="53"/>
+                                                                <TextBlock
+                                                                    Margin="10,0,0,0"
+                                                                    Grid.Column="1"
                                                                     VerticalAlignment="Center" 
                                                                     Text="{Binding title}"
                                                                     TextWrapping="Wrap" 
                                                                     MaxLines="2"/>
-                                                                </Border>
                                                             </Grid>
                                                         </DataTemplate>
                                                     </ListView.ItemTemplate>
-                                                   
                                                 </ListView>
-                                            </StackPanel>
+                                            </Grid>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
                                 </ListView>

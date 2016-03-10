@@ -111,6 +111,7 @@
     <Compile Include="Converter\AvatarValueConverter.cs" />
     <Compile Include="Converter\DateTimeToFriendlyStringConverter.cs" />
     <Compile Include="Converter\NullableBooleanToBoolean.cs" />
+    <Compile Include="Converter\SubjectTypeColorConverter.cs" />
     <Compile Include="Converter\UserActionStatusConverter.cs" />
     <Compile Include="Helpers\PageHelper.cs" />
     <Compile Include="Helpers\VisualTreeHelper.cs" />
@@ -136,6 +137,9 @@
     <Compile Include="Test\RelativePanePage.xaml.cs">
       <DependentUpon>RelativePanePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Triggers\WeakEventListener.cs" />
+    <Compile Include="Triggers\ITriggerValue.cs" />
+    <Compile Include="Triggers\MasterDetailStateTrigger.cs" />
     <Compile Include="UAritclePage.xaml.cs">
       <DependentUpon>UAritclePage.xaml</DependentUpon>
     </Compile>
@@ -196,6 +200,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Styles\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Test2Page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -225,6 +233,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
+    <Folder Include="Controls\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

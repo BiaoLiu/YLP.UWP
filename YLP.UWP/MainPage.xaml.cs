@@ -47,7 +47,7 @@ namespace YLP.UWP
             //     await new MessageDialog("").ShowAsync();
             // });
 
-            PopupMessage.DisplayMessage("请求失败");
+            //PopupMessage.DisplayMessage("请求失败");
 
         }
 
@@ -62,17 +62,7 @@ namespace YLP.UWP
             if (mainModel.region == RegionType.R2.ToString() ||
                 mainModel.region == RegionType.R3.ToString())
             {
-                var articleId = mainModel.articleid;
-
-                //窄屏
-                if (AdaptiveStates.CurrentState == NarrowState || AdaptiveStates.CurrentState == TempState)
-                {
-                    this.MasterFrame.Navigate(typeof(ArticleInfoPage), articleId);
-                }
-                else
-                {
-                    this.DetailFrame.Navigate(typeof(ArticleInfoPage), articleId);
-                }
+                SelectFrameNavigate(typeof (ArticleInfoPage), mainModel.articleid);
             }
         }
 
@@ -90,22 +80,33 @@ namespace YLP.UWP
             {
                 if (DetailFrame.Content != null)
                 {
-                    //MasterFrame.Navigate(DetailFrame.SourcePageType);
-
-                    MasterFrame.Visibility = Visibility.Collapsed;
-
-                    Grid.SetColumn(DetailFrame,0);
-
-                 //   DetailFrame.SetValue(Grid,"colo");
-
+                    this.PageRootGrid.ColumnDefinitions[0].Width = new GridLength(0);
                 }
             }
+        }
 
+        private void SubjectArticle_OnItemClick(object sender, ItemClickEventArgs e)
+        {
+            var article = e.ClickedItem as Article;
+            if (article == null)
+            {
+                return;
+            }
 
-            //if (MasterFrame.CurrentSourcePageType != typeof(MainPage))
-            //{
-            //    this.DetailFrame.Navigate(MasterFrame.CurrentSourcePageType);
-            //}
+            SelectFrameNavigate(typeof(ArticleInfoPage), article.articleid);
+        }
+
+        private void SelectFrameNavigate(Type pageType,object parameter)
+        {
+            //窄屏
+            if (AdaptiveStates.CurrentState == NarrowState || AdaptiveStates.CurrentState == TempState)
+            {
+                this.MasterFrame.Navigate(pageType, parameter);
+            }
+            else //宽屏
+            {
+                this.DetailFrame.Navigate(pageType, parameter);
+            }
         }
     }
 
@@ -133,6 +134,7 @@ namespace YLP.UWP
             {
                 return R2ArtilceTemplate;
             }
+
             //用户作品
             return UArticleTemplate;
         }

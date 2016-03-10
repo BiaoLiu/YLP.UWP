@@ -16,7 +16,6 @@ namespace YLP.UWP.Core.Models
         /// </summary>
         public string title { get; set; }
 
-        #region MyRegion
         /// <summary>
         /// 描述
         /// </summary>
@@ -33,7 +32,6 @@ namespace YLP.UWP.Core.Models
         /// 发布时间
         /// </summary>
         public string pubtime { get; set; } 
-        #endregion
 
         /// <summary>
         /// 专题推荐文章
